@@ -1,0 +1,14 @@
+[
+ {"key":"uk_plp",     "country":"UK","kind":"PLP",       "url":"https://www.lg.com/uk/tvs/"},
+ {"key":"uk_pdp",     "country":"UK","kind":"PDP",       "url":"https://www.lg.com/uk/tvs-soundbars/oled-evo/oled65c64la/"},
+ {"key":"uk_lineup",  "country":"UK","kind":"GUIDE",     "url":"https://www.lg.com/uk/buying-guides/tv-lineup-guide/"},
+ {"key":"uk_promo",   "country":"UK","kind":"SHOP",      "url":"https://www.lg.com/uk/promotion/"},
+ {"key":"de_pdp",     "country":"DE","kind":"PDP",       "url":"https://www.lg.com/de/tvs-und-soundbars/oled-evo/oled83c6elb/"},
+ {"key":"th_plp",     "country":"TH","kind":"PLP",       "url":"https://www.lg.com/th/tvs/"},
+ {"key":"th_pdp",     "country":"TH","kind":"PDP",       "url":"https://www.lg.com/th/tv-soundbars/oled-evo/oled65c5psa/"},
+ {"key":"th_guide",   "country":"TH","kind":"GUIDE",     "url":"https://www.lg.com/th/tvs-soundbars/tv-buying-guide/"},
+ {"key":"th_promo",   "country":"TH","kind":"SHOP",      "url":"https://www.lg.com/th/promotions/"},
+ {"key":"br_plp",     "country":"BR","kind":"PLP",       "url":"https://www.lg.com/br/tvs-e-soundbars/todas-tvs-soundbars/"},
+ {"key":"br_pdp",     "country":"BR","kind":"PDP",       "url":"https://www.lg.com/br/tvs-e-soundbars/oled-evo/oled55c6psa/"},
+ {"key":"sam_uk_plp", "country":"UK","kind":"PLP_COMP",  "url":"https://www.samsung.com/uk/tvs/all-tvs/"}
+]
