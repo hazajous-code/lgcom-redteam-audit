@@ -340,6 +340,24 @@ code{font-family:var(--ff-mono);font-size:13px;background:var(--surface-2);paddi
 .path .pwhy{font-size:14px;color:var(--ink-2);line-height:1.65}
 @media (max-width:900px){.path{grid-template-columns:36px minmax(0,1fr) 80px;row-gap:8px}
   .path .ppers,.path .pwhy{grid-column:2 / -1}}
+
+/* ── 방법론 영상 ── */
+.vidwrap{margin:0;border-top:1px solid var(--rule);background:var(--surface-2);padding:18px}
+.vidwrap .vhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:12px}
+.vidwrap .vhead h4{font-size:15.5px}
+.vidwrap .vhead .vtag{font-family:var(--ff-mono);font-size:11px;font-weight:600;letter-spacing:.09em;
+  color:var(--accent);border:1px solid var(--accent-line);border-radius:3px;padding:2px 7px}
+.vidwrap .vhead .vmeta{margin-left:auto;font-family:var(--ff-mono);font-size:11px;color:var(--ink-3)}
+.vidframe{padding:10px;background:var(--surface);border:1px solid var(--rule-strong);border-radius:7px}
+.vidframe video{width:100%;display:block;border:1px solid var(--rule-strong);border-radius:3px;
+  background:#0e1012;box-shadow:0 2px 5px rgba(0,0,0,.13), 0 8px 22px -10px rgba(0,0,0,.22)}
+:root[data-theme="dark"] .vidframe video,
+:root:not([data-theme="light"]) .vidframe video{box-shadow:none}
+.vidnote{font-size:13.4px;color:var(--ink-2);line-height:1.75;margin-top:11px}
+.vidnote strong{color:var(--ink)}
+.vidsteps{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.vidsteps span{font-family:var(--ff-mono);font-size:11px;color:var(--ink-2);
+  background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:3px 8px}
 </style>
 
 <div class="shell">
@@ -416,6 +434,33 @@ code{font-family:var(--ff-mono);font-size:13px;background:var(--surface-2);paddi
       </div>
 
       <div class="paths" id="paths"></div>
+
+      <div class="vidwrap">
+        <div class="vhead">
+          <span class="vtag">SESSION RECORDING</span>
+          <h4>실제 세션 — P01(게이머)이 막히기까지</h4>
+          <span class="vmeta">lg.com/uk · 무편집 · 자막만 추가</span>
+        </div>
+        <div class="vidframe">
+          <video id="demovid" src="redteam-demo.webm" controls preload="metadata"
+                 playsinline aria-label="P01 페르소나가 lg.com에서 165Hz 게이밍 TV를 찾다가 막히는 실제 세션 녹화"></video>
+        </div>
+        <div class="vidsteps">
+          <span>01 PLP 진입</span><span>02 게이밍 필터</span><span>03 주사율 없음</span>
+          <span>04 PDP 이동</span><span>05 Key Features</span><span>06 스펙표</span>
+          <span>07 숫자 불일치</span><span>08 See All Specs</span><span>09 숨어 있던 스펙</span>
+          <span>10 단위 없는 치수</span><span>11 이탈</span>
+        </div>
+        <p class="vidnote">
+          브라우저를 <strong>사람이 조작하지 않았습니다.</strong> 스크립트가 lg.com을 열고, 필터를 찾고,
+          스펙표로 내려가고, <code>See All Specs</code>를 눌러 펼친 뒤 문자열을 읽습니다.
+          화면에 보이는 <strong>붉은 테두리는 그 순간 판독한 위치</strong>이고,
+          하단 자막은 <strong>P01의 과업 기준으로 무엇을 확인하고 있는지</strong>를 표시한 것입니다.
+          영상 속 수치(<code>674자 → 4,531자</code>)는 자막에 미리 적어둔 값이 아니라
+          <strong>그 순간 페이지에서 읽어 넣은 값</strong>입니다.
+          쿠키 동의·거부 버튼은 <strong>누르지 않았고</strong>, 화면을 덮는 레이어만 제거했습니다.
+        </p>
+      </div>
     </section>
 
     <!-- ══════ §0 ══════ -->
