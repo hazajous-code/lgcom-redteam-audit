@@ -342,6 +342,14 @@ code{font-family:var(--ff-mono);font-size:13px;background:var(--surface-2);paddi
   .path .ppers,.path .pwhy{grid-column:2 / -1}}
 
 /* ── 방법론 영상 ── */
+.vspeed{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 12px}
+.vrate{font-family:var(--ff-mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+  background:var(--accent);color:var(--accent-ink);border-radius:3px;padding:3px 8px}
+.vbtn{font-family:var(--ff-mono);font-size:11.5px;font-weight:600;padding:3px 10px;
+  border:1px solid var(--rule-strong);background:var(--surface);color:var(--ink-2);
+  border-radius:3px;cursor:pointer}
+.vbtn[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.vhint{font-size:12px;color:var(--ink-3);margin-left:4px}
 .vidwrap{margin:0;border-top:1px solid var(--rule);background:var(--surface-2);padding:18px}
 .vidwrap .vhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:12px}
 .vidwrap .vhead h4{font-size:15.5px}
@@ -376,6 +384,7 @@ code{font-family:var(--ff-mono);font-size:13px;background:var(--surface-2);paddi
       <a href="#s6"><span class="n">06</span><span>참고 · 포맷 배정</span></a>
       <a href="#s7"><span class="n">07</span><span>제약 · 다음 회차</span></a>
       <a href="#s8"><span class="n">08</span><span>무엇을 만들 것인가</span></a>
+      <a href="#s9"><span class="n">09</span><span>결론 — 왜 이 방법인가</span></a>
     </nav>
     <div class="rail-foot">화면 실태·스펙 값은 <strong>lg.com 실측</strong>(2026-08-25). 이탈 수치·VOC는 <strong>시뮬레이션</strong>입니다.</div>
   </aside>
@@ -394,6 +403,9 @@ code{font-family:var(--ff-mono);font-size:13px;background:var(--surface-2);paddi
         결론은 콘텐츠 부족이 아니었습니다 — <strong>LG의 PDP는 경쟁사보다 1.5배 길고 섹션은 2배 많은데</strong>,
         그 콘텐츠가 <strong>“이 기술이 훌륭하다”를 말하고 고객은 “내 상황에서 이게 맞나”를 묻고 있었습니다.</strong>
         같은 질문에 <strong>삼성은 비교를 대신 해 주고, 중국 브랜드는 스펙을 이름에 넣어</strong> 답하고 있습니다.
+        그런데 이 사실들은 어려운 발견이 아닙니다 —
+        <strong>4개국을 같은 날 나란히 놓기만 하면 보이는 것</strong>이었고,
+        지금까지 그 일이 <strong>어느 조직의 일도 아니었을 뿐</strong>입니다(<a href="#s9" style="color:var(--accent)">§09 결론</a>).
       </p>
       <dl class="mast-meta">
         <div><dt>실측</dt><dd>UK · DE · TH · BR</dd></div>
@@ -441,8 +453,14 @@ code{font-family:var(--ff-mono);font-size:13px;background:var(--surface-2);paddi
           <h4>실제 세션 — P01(게이머)이 막히기까지</h4>
           <span class="vmeta">lg.com/uk · 무편집 · 자막만 추가</span>
         </div>
+        <div class="vspeed">
+          <span class="vrate" id="vrate">2× 재생</span>
+          <button class="vbtn" type="button" data-rate="1">1×</button>
+          <button class="vbtn" type="button" data-rate="2" aria-pressed="true">2×</button>
+          <span class="vhint">실제 세션은 84초입니다. 기본 2배속으로 재생합니다.</span>
+        </div>
         <div class="vidframe">
-          <video id="demovid" src="redteam-demo.webm" controls preload="metadata"
+          <video id="demovid" src="redteam-demo.webm" controls preload="metadata" data-rate="2"
                  playsinline aria-label="P01 페르소나가 lg.com에서 165Hz 게이밍 TV를 찾다가 막히는 실제 세션 녹화"></video>
         </div>
         <div class="vidsteps">
@@ -900,6 +918,71 @@ code{font-family:var(--ff-mono);font-size:13px;background:var(--surface-2);paddi
           <strong>"4개국 화면을 직접 열어 고객이 막히는 지점을 문자열 단위로 특정했고, 그중 절반은 이미 있는 정보를 접어둔 문제였으며,
           경쟁사는 같은 질문을 체크박스 하나로 끝내고 있었습니다"</strong>가 이번 회차가 실제로 말할 수 있는 것입니다.
           규모는 다음 회차의 과제이고, 그 설계는 위 표에 있습니다.</p>
+      </div>
+    </section>
+
+
+    <!-- ══════ §9 결론 ══════ -->
+    <section class="sec" id="s9">
+      <div class="sec-head"><span class="sec-num">09</span><div>
+        <h2>결론 — 왜 이 방법이어야 하는가</h2>
+        <p class="deck">문제는 각 조직이 일을 못 해서가 아니었습니다. <strong>같은 것을 같은 기준으로 동시에 볼 방법이 없었을 뿐입니다.</strong></p>
+      </div></div>
+
+      <div class="ba">
+        <div class="ba-col">
+          <span class="kicker">지금까지 · 관리 단위가 쪼개져 있었다</span>
+          <h4>각자 자기 영역만 정확히 봤다</h4>
+          <ul>
+            <li><strong>BU(제품)</strong>는 제품 스펙을 압니다. 그러나 그 스펙이 <strong>국가별로 어떻게 노출되는지</strong>는 보지 않습니다.</li>
+            <li><strong>법인</strong>은 자기 나라 화면을 봅니다. 그러나 <strong>옆 나라가 같은 필드를 다르게 해둔 것</strong>은 알 수 없습니다.</li>
+            <li><strong>고객경험·채널</strong>은 퍼넬 지표를 봅니다. 그러나 <strong>화면에 실제로 어떤 문자열이 있는지</strong>까지 내려가지 않습니다.</li>
+            <li>전 경로를 <strong>수기로 실시간 점검하는 것은 물리적으로 불가능</strong>했고, 그래서 정밀 진단도 전체를 아우르는 개선안도 만들기 어려웠습니다.</li>
+          </ul>
+        </div>
+        <div class="ba-col new">
+          <span class="kicker">이번에 · 나란히 놓자 바로 보였다</span>
+          <h4>같은 날 같은 기준으로 4개국을 열었을 뿐입니다</h4>
+          <ul>
+            <li>치수 단위가 <strong>태국에만 <code>mm</code></strong> — 한 법인만 보면 "원래 그런 것"입니다.</li>
+            <li>아코디언 초기 확장이 <strong>UK 0/36 · TH 0/37 · BR 0/35</strong> — 한 나라만 보면 UX 취향, 넷이 같으면 <strong>템플릿 문제</strong>입니다.</li>
+            <li><strong><code>/br/tvs/</code> 404</strong> — UK·TH가 같은 패턴으로 정상임을 알아야 <strong>버그로 인지</strong>됩니다.</li>
+            <li>주사율 필터 부재 — <strong>경쟁 3사와 나란히</strong> 놓아야 "우리만 없다"가 보입니다.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        <span class="lbl">핵심</span>
+        <p>위 네 가지는 <strong>어려운 발견이 아닙니다.</strong> 화면을 열어 문자열을 읽으면 나오는 사실입니다.
+          그동안 보이지 않았던 이유는 난이도가 아니라 <strong>"4개국을 같은 날 같은 기준으로 나란히 놓는 일"이
+          어느 조직의 일도 아니었기 때문</strong>입니다.</p>
+      </div>
+
+      <h3 class="sub">앞으로 · 두 종류의 관리 영역을 함께 본다 <span class="mono">MONITORING</span></h3>
+      <div class="tw"><table>
+        <thead><tr><th>영역</th><th>무엇을 보는가</th><th>주기 실행이 만드는 것</th><th>이번 회차의 예</th></tr></thead>
+        <tbody id="mgmt"></tbody>
+        <caption>같은 페르소나·같은 화면으로 반복 실행하면 두 영역이 자동으로 갈립니다 — 바뀐 것과, 아직 없는 것.</caption>
+      </table></div>
+
+      <div class="callout">
+        <span class="lbl">기대 효과</span>
+        <p>파편화되어 <strong>consensus를 이루지 못했던 영역</strong>을 한 화면에 올리는 것이 목적입니다.
+          BU·법인·고객경험이 <strong>각자 다른 시점의 다른 자료</strong>를 들고 만나는 대신,
+          <strong>같은 날 같은 기준으로 만든 하나의 화면</strong>을 함께 봅니다.
+          개선점에 대한 합의가 <strong>타임 갭 없이</strong> 이루어지고, 무엇을 먼저 할지도 같은 근거 위에서 정해집니다.</p>
+      </div>
+
+      <h3 class="sub">왜 AI인가 <span class="mono">WHY NOW</span></h3>
+      <div class="gapstat" id="whyai"></div>
+
+      <div class="callout">
+        <span class="lbl">사람을 대체하는 것이 아닙니다</span>
+        <p>판단은 사람이 합니다. AI가 대신하는 것은 <strong>"쉬지 않고, 같은 기준으로, 동시에 본다"</strong>는 부분입니다.
+          사람은 4개국 화면을 같은 날 같은 눈으로 열어볼 수 없지만, 이 방식은 그것을 <strong>반복 가능한 작업</strong>으로 만듭니다.
+          그렇게 확보되는 것은 속도 자체가 아니라 <strong>동시성</strong>이고,
+          동시성이 있어야 비로소 <strong>모두가 같은 것을 보고 합의</strong>할 수 있습니다.</p>
       </div>
     </section>
 
@@ -1414,6 +1497,33 @@ const BRAND=[
   tcl:{v:"—",t:"na",d:"미확인"}}
 ];
 const BT={best:["good","앞섬"],ok:["good","가능"],mid:["warn","부분"],bad:["h4","막힘"],na:["out","—"]};
+const MGMT=[
+ {a:"변화 관리 영역",
+  b:"이미 있는 콘텐츠가 <strong>바뀌었는지</strong>",
+  c:"직전 회차 스냅샷과 대조해 <strong>달라진 지점만</strong> 자동 추출",
+  d:"카탈로그 수가 132 → 121로 변동. 세대 교체(TH C5 / UK·BR C6)"},
+ {a:"신규 개선 영역",
+  b:"고객 질문에 답하는 콘텐츠가 <strong>아직 없는지</strong>",
+  c:"페르소나 과업 실패 지점을 <strong>제작 단위로</strong> 환산",
+  d:"신규 제작 5종 + 배치 변경 2종 (§08)"},
+ {a:"교차 검증 영역",
+  b:"국가·브랜드 간 <strong>같은 필드가 다른지</strong>",
+  c:"4개국을 한 표에 올려 <strong>템플릿 문제와 로컬 설정을 분리</strong>",
+  d:"단위 표기는 TH만, 아코디언은 4개국 공통"}
+];
+$("#mgmt").innerHTML=MGMT.map(m=>`<tr>
+  <th>${esc(m.a)}</th><td>${m.b}</td><td>${m.c}</td>
+  <td><span style="font-size:12.5px">${m.d}</span></td></tr>`).join("");
+
+const WHYAI=[
+ {v:"4개국", k:"같은 날 · 같은 기준으로<br><strong>동시에 관측</strong>"},
+ {v:"14개", k:"화면 단위로 판독한<br><strong>진단 지점</strong>"},
+ {v:"23장", k:"출처 URL이 붙은<br><strong>실측 캡처</strong>"},
+ {v:"반복", k:"같은 절차를 <strong>주기적으로</strong><br>다시 실행 가능"}
+];
+$("#whyai").innerHTML=WHYAI.map(w=>`<div><span class="v">${esc(w.v)}</span>
+  <span class="k">${w.k}</span></div>`).join("");
+
 $("#brandtab").innerHTML=BRAND.map(b=>{
   const cell=o=>{const S=BT[o.t]||BT.na;
     return `<td><span class="pill ${S[0]}">${esc(o.v)}</span><br><span style="font-size:12px">${esc(o.d)}</span></td>`;};
@@ -1544,6 +1654,21 @@ if("IntersectionObserver" in window){
   [$("#funnel"),$("#cej")].forEach(el=>el&&io.observe(el));
   setTimeout(()=>fill(document),2000);
 }else fill(document);
+
+/* 영상 기본 2배속 */
+(() => {
+  const v = $("#demovid"); if (!v) return;
+  const setRate = r => {
+    v.playbackRate = r;
+    const badge = $("#vrate"); if (badge) badge.textContent = r + "× 재생";
+    $$(".vbtn").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.rate === r)));
+  };
+  const apply = () => setRate(+(v.dataset.rate || 2));
+  v.addEventListener("loadedmetadata", apply);
+  v.addEventListener("play", apply, { once: true });
+  if (v.readyState >= 1) apply();
+  $$(".vbtn").forEach(b => b.addEventListener("click", () => setRate(+b.dataset.rate)));
+})();
 
 const links=$$("#nav a"), secs=links.map(a=>$(a.getAttribute("href"))).filter(Boolean);
 if("IntersectionObserver" in window){
