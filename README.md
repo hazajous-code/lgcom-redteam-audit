@@ -5,6 +5,9 @@ AI 가상 고객(레드팀)이 **lg.com UK · DE · TH · BR** 에 실제 진입
 
 **리포트 보기 → https://hazajous-code.github.io/lgcom-redteam-audit/**
 
+**Journey Lens UK (디지털 미스터리 쇼퍼 제안·진단) → https://hazajous-code.github.io/lgcom-redteam-audit/journey-lens-uk/**
+— 제안 프레임, LG.com UK 사업부별 Most Popular 6개 제품 진단, 65" OLED TV 심층 사례 (2026-10-16/19 실측, `journey-lens-uk/index.html`)
+
 ## 무엇이 실측이고 무엇이 시뮬레이션인가
 
 | 구분 | 성격 |

@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="디지털 미스터리 쇼퍼 제안 프레임과 LG.com UK 사업부별·TV 심층 진단 결과">
+<style>*{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Journey Lens UK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: one reading column, top-to-bottom argument — 결론 → 근거 3개 → 원인 → 과제 → 다음 단계 → 부록(입력). White, single light theme by request. Readability: Noto Sans KR 16px / 1.75, high-contrast ink. */
+:root{
+  color-scheme:light;
+  --bg:#FFFFFF; --soft:#F6F5F7; --line:#E3E0E6; --line-2:#CFCAD3;
+  --ink:#141216; --ink-2:#36323A; --muted:#5C5661;
+  --accent:#A50034; --accent-soft:#FBEFF3;
+  --good:#18693C; --good-soft:#E5F3EA; --warn:#7F5300; --warn-soft:#FCF3E1; --crit:#A8231B; --crit-soft:#FCE8E6;
+  --font-ui:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --font-data:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-ui);font-size:16px;line-height:1.75;letter-spacing:-.005em;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+.num{letter-spacing:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:var(--accent);text-underline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:20px;padding-block:10px;overflow-x:auto}
+.logo{font-weight:700;white-space:nowrap;letter-spacing:-.01em}
+.logo span{color:var(--accent)}
+nav.toc{display:flex;gap:2px}
+nav.toc a{white-space:nowrap;text-decoration:none;color:var(--ink-2);font-size:14px;padding:6px 10px;border-radius:6px}
+nav.toc a:hover{background:var(--soft)}
+nav.toc a.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+nav.toc a b{font-family:var(--font-data);font-weight:500;color:var(--muted);margin-right:4px;font-size:11px}
+section{padding-block:44px;border-bottom:1px solid var(--line);scroll-margin-top:118px}
+section:last-of-type{border-bottom:0}
+.step{font-family:var(--font-data);font-size:14px;font-weight:700;color:var(--accent);letter-spacing:.01em;margin-bottom:6px}
+h1{font-size:32px;line-height:1.35;letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance;max-width:24ch}
+h2{font-size:24px;line-height:1.4;letter-spacing:-.01em;margin:0 0 8px;text-wrap:balance}
+h3{font-size:16.5px;margin:0 0 8px;line-height:1.5}
+.lede{color:var(--ink-2);max-width:70ch;margin:0 0 24px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--muted);margin-bottom:28px}
+.meta b{color:var(--ink);font-weight:600}
+.claims{display:grid;gap:12px;counter-reset:c}
+.claim{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:14px;align-items:start;padding:16px 18px;border:1px solid var(--line);border-radius:10px}
+.claim .n{font-family:var(--font-data);font-size:22px;font-weight:700;color:var(--accent);line-height:1.2}
+.claim h3{font-size:17.5px;margin:0 0 4px;line-height:1.5}
+.claim p{margin:0;color:var(--ink-2);font-size:15px}
+.claim a.go{font-size:14px;white-space:nowrap;text-decoration:none}
+.status3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px}
+.status3>div{background:var(--soft);border-radius:8px;padding:12px 14px;font-size:14px;color:var(--ink-2)}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.p-ok{background:var(--good-soft);color:var(--good)}.p-part{background:var(--warn-soft);color:var(--warn)}.p-no{background:var(--crit-soft);color:var(--crit)}.p-hyp{background:var(--soft);color:var(--muted);border:1px solid var(--line)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}
+.kpi{border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .v{font-family:var(--font-data);font-size:28px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.kpi .v small{font-size:14px;color:var(--muted)}
+.kpi .l{font-size:14px;font-weight:700}
+.kpi .d{font-size:13.5px;color:var(--muted)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.6}
+th{font-size:12.5px;letter-spacing:.02em;color:var(--muted);font-weight:600;text-align:left;padding:10px;border-bottom:1px solid var(--line);background:var(--soft);white-space:nowrap}
+td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+tr.lg td{background:var(--accent-soft)}
+tr.hl td{background:#FFFBEF}
+.num{font-family:var(--font-data);font-variant-numeric:tabular-nums}
+.note{font-size:13.5px;color:var(--muted)}
+.callout{border-left:3px solid var(--accent);background:var(--accent-soft);padding:14px 18px;border-radius:0 8px 8px 0;margin:20px 0;font-size:15px;color:var(--ink-2)}
+.callout b{color:var(--ink)}
+.caveat{border-left:3px solid var(--warn);background:var(--warn-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0;font-size:14px;color:var(--ink-2)}
+.dot{width:11px;height:11px;border-radius:50%;border:2px solid var(--accent);display:inline-block;vertical-align:-1px}
+.dot.R{background:var(--accent)}.dot.M{background:linear-gradient(90deg,var(--accent) 50%,transparent 50%)}
+.dot.L{border-color:var(--muted)}.dot.N{border-color:var(--line-2);background:var(--soft)}.dot.E{border:1px dashed var(--line-2)}
+.yr{font-family:var(--font-data);font-size:12.5px;font-weight:700;padding:1px 6px;border-radius:4px;background:var(--soft);color:var(--ink-2);white-space:nowrap}
+.yr.old{background:var(--crit-soft);color:var(--crit)}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.box{border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+.cmp{display:grid;grid-template-columns:130px minmax(0,1fr) minmax(0,1fr);font-size:14.5px}
+.cmp>div{padding:8px 6px;border-bottom:1px solid var(--line);min-width:0}
+.cmp .h{font-weight:700;font-size:13px;color:var(--muted)}
+.cmp .k{color:var(--muted)}
+.cmp .bad{color:var(--crit);font-weight:600}
+.cmp.two-col{grid-template-columns:120px minmax(0,1fr)}
+.causes{display:grid;gap:14px}
+.cause{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.cause summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;padding:16px 18px;align-items:start}
+.cause summary::-webkit-details-marker{display:none}
+.cause summary:hover{background:var(--soft)}
+.cause summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.cause .ltr{font-family:var(--font-data);font-size:20px;color:var(--accent);font-weight:700}
+.cause h3{margin:0 0 3px;font-size:17.5px}
+.cause .why{font-size:15px;color:var(--ink-2);margin:0}
+.cause .cnt{font-size:13px;color:var(--muted);white-space:nowrap}
+.cause .body{padding:0 18px 16px 76px}
+.fd{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;padding:12px 0;border-top:1px dashed var(--line);font-size:15px}
+.fd .id{font-family:var(--font-data);font-size:13px;font-weight:700;color:var(--muted)}
+.fd .src{font-size:13px;margin-top:4px}
+.fd .src a{word-break:break-all}
+.pri{display:grid;gap:10px}
+.prow{display:grid;grid-template-columns:72px minmax(0,1fr) 200px;gap:14px;align-items:start;padding:14px 16px;border:1px solid var(--line);border-radius:10px}
+.prow .when{font-size:14px;font-weight:700;color:var(--accent)}
+.prow h3{margin:0 0 3px}
+.prow .m{font-size:14.5px;color:var(--muted)}
+.prow .r{font-size:13.5px;color:var(--ink-2)}
+.next{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.next .box h3{display:flex;gap:8px;align-items:center}
+form.rec{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px}
+form.rec .full{grid-column:1/-1}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:13.5px;color:var(--ink-2);font-weight:500;min-width:0}
+select,input,textarea{font:inherit;font-size:14.5px;color:var(--ink);background:#fff;border:1px solid var(--line-2);border-radius:6px;padding:7px 8px;width:100%;min-width:0}
+textarea{min-height:56px;resize:vertical}
+button.btn{font:inherit;cursor:pointer;background:var(--ink);color:#fff;font-weight:700;font-size:14px;padding:8px 14px;border-radius:6px;border:0}
+button.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line-2)}
+button.btn[disabled]{opacity:.5;cursor:not-allowed}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.status{font-size:13.5px;color:var(--muted);align-self:center}
+.mission{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.65;background:var(--soft);border-radius:6px;padding:12px;color:var(--ink-2);white-space:pre-wrap}
+.empty{border:1px dashed var(--line-2);border-radius:8px;padding:18px;color:var(--muted);text-align:center;font-size:14.5px}
+.srcs{columns:2;column-gap:28px;font-size:14px}
+.srcs div{break-inside:avoid;margin-bottom:6px}
+.srcs a{word-break:break-all}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:#fff;font-size:12px;padding:6px 8px;border-radius:4px;z-index:20;max-width:280px}
+@media (max-width:860px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .two,.next,.status3{grid-template-columns:minmax(0,1fr)}
+  .prow{grid-template-columns:60px minmax(0,1fr)}
+  .prow .r{grid-column:2}
+  .srcs{columns:1}
+}
+@media (max-width:560px){
+  h1{font-size:24px}
+  .claim{grid-template-columns:28px minmax(0,1fr)}
+  .claim a.go{grid-column:2}
+  .cause .body{padding:0 16px 14px 16px}
+  form.rec{grid-template-columns:minmax(0,1fr)}
+  .cmp{grid-template-columns:90px minmax(0,1fr) minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:14px;color:var(--ink-2);margin:4px 0 12px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.gap{display:grid;gap:10px}
+.grow{display:grid;grid-template-columns:130px minmax(0,1fr) 52px;gap:12px;align-items:center}
+.gl{font-size:14.5px;font-weight:500}
+.gb{display:flex;flex-direction:column;gap:3px}
+.gtrack{height:9px;background:var(--soft);border-radius:0 4px 4px 0}
+.gbar{height:100%;border-radius:0 4px 4px 0}
+.gbar.lg{background:var(--accent)}.gbar.co{background:#8E8893}.gbar.az{background:#E7B3C4}
+.gd{font-variant-numeric:tabular-nums;text-align:right;font-weight:700;color:var(--muted)}
+.gd.neg{color:var(--crit)}.gd.pos{color:var(--good)}
+table.score td.sc{text-align:center;font-weight:700;font-variant-numeric:tabular-nums;min-width:62px}
+td.s1{background:#F6D5D2;color:#7A1A14}td.s2{background:#FBE7E4;color:#8F2A22}td.s3{background:#F6F5F7;color:var(--ink-2)}td.s4{background:#E3F1E8;color:#1D5E37}td.s5{background:#CFE8D8;color:#124A2A}
+tr.lg td.sc{box-shadow:inset 0 0 0 1px rgba(255,255,255,.6)}
+@media (max-width:560px){.grow{grid-template-columns:96px minmax(0,1fr) 44px}}
+.journey{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:j}
+.jstage{border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0;position:relative}
+.jstage:not(:last-child)::after{content:"→";position:absolute;right:-13px;top:18px;color:var(--muted);font-weight:700;background:#fff;padding:0 2px}
+.jhead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px}
+.jk{font-weight:700;color:var(--accent);letter-spacing:.02em}
+.jc{color:var(--muted);white-space:nowrap}
+.jv{font-size:14.5px;color:var(--ink-2);margin:0 0 10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+ul.chk{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:8px}
+ul.chk li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:6px;font-size:14.5px;line-height:1.6}
+.mk{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;font-size:11px;font-weight:700;margin-top:3px}
+.jc .mk{margin:0 3px 0 6px;vertical-align:-3px}
+.mk.ok{background:var(--good-soft);color:var(--good)}.mk.part{background:var(--warn-soft);color:var(--warn)}.mk.no{background:var(--crit-soft);color:var(--crit)}
+@media (max-width:960px){.journey{grid-template-columns:minmax(0,1fr)}.jstage:not(:last-child)::after{content:"↓";right:auto;left:50%;top:auto;bottom:-16px}}
+header.top .wrap.sub{padding-block:0 8px}
+header.top .wrap.sub:empty,#toc:empty{display:none}
+nav.tabs{display:flex;gap:4px;margin-left:8px}
+nav.tabs a{white-space:nowrap;text-decoration:none;color:var(--ink-2);font-size:15px;font-weight:500;padding:8px 14px;border-radius:8px}
+nav.tabs a:hover{background:var(--soft)}
+nav.tabs a.on{background:var(--ink);color:#fff;font-weight:700}
+nav.tabs .cnt{font-size:12px;opacity:.75;margin-left:2px}
+nav.toc{overflow-x:auto}
+section.hero{padding-block:56px 44px;background:linear-gradient(180deg,var(--accent-soft),#fff 70%)}
+section.hero h1{max-width:30ch;font-size:34px}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:4px 0 28px}
+.pillar{background:#fff;border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:12px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:6px}
+.pillar .pk{font-size:13px;font-weight:700;color:var(--accent)}
+.pillar h3{margin:0;font-size:21px}
+.pillar .pm{margin:0;font-weight:700;font-size:15.5px}
+.pillar .pe{margin:4px 0 0;font-size:14.5px;color:var(--ink-2)}
+.pillar .pn{margin:6px 0 0;font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.herokey{display:flex;flex-direction:column;gap:2px;margin:0 0 12px}
+.herokey p{margin:0;font-size:17px;font-weight:700}
+@media (max-width:860px){.pillars{grid-template-columns:minmax(0,1fr)}}
+.routes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:8px}
+.route{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;transition:border-color .15s,transform .15s}
+.route:hover{border-color:var(--accent);transform:translateY(-2px)}
+.route .rk{font-size:13px;font-weight:700;color:var(--accent)}
+.route b{font-size:16.5px;line-height:1.45}
+.route span:last-child{font-size:13.5px;color:var(--muted)}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0 4px}
+.metric{border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.metric.new{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.mh{display:flex;align-items:center;gap:8px}
+.mh b{font-size:17px}
+.mn{width:24px;height:24px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--ink-2)}
+.mq{margin:0;font-weight:500}
+.me{margin:0;font-size:14px;color:var(--ink-2);background:var(--soft);border-radius:8px;padding:10px 12px}
+.me span,.lab{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.02em;margin-bottom:2px}
+.vs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.side{border-radius:12px;padding:18px;border:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.side.win{background:var(--good-soft);border-color:#BFDFCB}
+.side.lose{background:var(--crit-soft);border-color:#F2C9C4}
+.side .sk{font-weight:700;font-size:15px}
+.side .row{display:grid;grid-template-columns:76px minmax(0,1fr);gap:10px;font-size:14.5px}
+.side .row span{font-weight:700;color:var(--muted);font-size:13px}
+.side .row p{margin:0}
+.side .big{font-size:22px;font-weight:700;margin-top:auto}
+.side.win .big{color:var(--good)}.side.lose .big{color:var(--crit)}
+.side .big small{font-size:14px;font-weight:500;color:var(--ink-2)}
+.tasks{display:grid;gap:10px}
+.tcard{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.tcard .th{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.tcard .th h3{margin:0;font-size:17px}
+.tcard .th .note{margin-left:auto}
+.tcard .tb{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.tcard .tb p{margin:0;font-size:14.5px}
+table.bu th[scope=row]{background:var(--soft);white-space:nowrap;font-size:13.5px;color:var(--ink);text-transform:none;letter-spacing:0;vertical-align:top}
+table.bu td.good{background:var(--good-soft)}
+table.bu td.bad{background:#FFF6F5}
+ol.pat{margin:16px 0 0;padding-left:22px;display:grid;gap:12px;max-width:80ch}
+.pcards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.pcard{border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.pcard header{display:flex;justify-content:space-between;align-items:center}
+.bu-tag{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:2px 9px;border-radius:999px}
+.pcard h3{margin:0;font-size:17px}
+.pcard h3 a{color:var(--ink);text-decoration:none}
+.pcard h3 a:hover{color:var(--accent);text-decoration:underline}
+.pc-sec{border-top:1px dashed var(--line);padding-top:8px}
+.pc-sec p{margin:0;font-size:14.5px}
+.pc-sec.ai{background:var(--soft);border:0;border-radius:8px;padding:10px 12px}
+.pc-sec ul.chk{margin:0}
+@media (max-width:960px){.routes{grid-template-columns:repeat(2,minmax(0,1fr))}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.pcards{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:700px){.vs,.tcard .tb{grid-template-columns:minmax(0,1fr)}.metrics,.routes{grid-template-columns:minmax(0,1fr)}section.hero h1{font-size:26px}nav.tabs a{padding:7px 10px;font-size:14px}}
+details.gloss{border:1px solid var(--line);border-radius:10px;padding:0 16px;margin:0 0 20px;background:var(--soft)}
+details.gloss summary{cursor:pointer;padding:12px 0;font-weight:700;font-size:14.5px}
+details.gloss dl{display:grid;grid-template-columns:190px minmax(0,1fr);gap:8px 16px;margin:0 0 14px;font-size:14.5px}
+details.gloss dt{font-weight:700}
+details.gloss dd{margin:0;color:var(--ink-2)}
+@media (max-width:700px){details.gloss dl{grid-template-columns:minmax(0,1fr)}details.gloss dd{margin-bottom:6px}}
+</style>
+
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="logo">Journey Lens <span>UK</span></div>
+  <nav class="tabs" id="tabs" aria-label="화면"></nav>
+</div><div class="wrap sub"><nav class="toc" id="toc" aria-label="이 화면의 목차"></nav></div></header>
+
+<main id="app"></main>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+/* ===================== 데이터: 2026-10-16 공개 페이지 직접 확인 ===================== */
+const AUDIT_DATE="2026-10-16";
+const SRC={
+  lineup:["LG UK · TV Lineup Guide","https://www.lg.com/uk/buying-guides/tv-lineup-guide/"],
+  guide:["LG UK · TV Buying Guide","https://www.lg.com/uk/tvs-soundbars/tv-buying-guide/"],
+  tech:["LG UK · TV Technology 가이드","https://www.lg.com/uk/tvs-soundbars/tv-buying-guide/tv-technology"],
+  size:["LG UK · TV Size 가이드","https://www.lg.com/uk/tvs-soundbars/tv-buying-guide/tv-size/"],
+  lab:["LG UK · LG LAB QNED vs OLED","https://www.lg.com/uk/lg-experience/lg-lab/qned-vs-oled-tvs"],
+  why:["LG UK · Why LG OLED evo","https://www.lg.com/uk/tvs-soundbars/why-lg-oled-evo/"],
+  feat:["LG UK · TV Features Guide","https://www.lg.com/uk/buying-guides/tv-features-guide/"],
+  c6:["LG UK · OLED65C65LA 상품 페이지","https://www.lg.com/uk/tvs-soundbars/oled-evo/oled65c65la/"],
+  warranty:["LG UK · Warranty Information","https://www.lg.com/uk/support/warranty-information/"],
+  usrel:["LG US · OLED Reliability","https://www.lg.com/us/experience-tvs/oled-tv/reliability"],
+  fvp2016:["LG UK · Freeview Play 공지(2016)","https://www.lg.com/uk/support/announcement/GBNTC160608120340/"],
+  oledcat:["LG UK · OLED TV 카테고리","https://www.lg.com/uk/tvs-soundbars/oled-tvs/"],
+  curC6:["Currys · LG C6 65\" (OLED65C64LA)","https://www.currys.co.uk/products/lg-c6-65-oled-ai-4k-hdr-smart-tv-2026-oled65c64la-10301788.html"],
+  curS90H:["Currys · Samsung S90H 65\"","https://www.currys.co.uk/products/samsung-s90h-65-oled-glare-free-4k-vision-ai-smart-tv-2026-qe65s90h-10304096.html"],
+  curSearch:["Currys · '65 inch oled tv' 검색","https://www.currys.co.uk/search?q=65%20inch%20oled%20tv"],
+  amzSearch:["Amazon UK · '65 inch oled tv' 검색","https://www.amazon.co.uk/s?k=65+inch+oled+tv"],
+  amzC6:["Amazon UK · LG C6 + US60T 번들","https://www.amazon.co.uk/dp/B0GVDRNCYF"],
+  home:["LG UK · 홈","https://www.lg.com/uk/"],
+  plp:["LG UK · OLED evo 목록(PLP)","https://www.lg.com/uk/tvs-soundbars/oled-evo/"],
+  oledtvs:["LG UK · /oled-tvs/ 페이지","https://www.lg.com/uk/tvs-soundbars/oled-tvs/"]
+};
+const QS=[
+ {id:"Q01",q:"Best TV for a bright living room: OLED vs QNED vs Mini LED?",ko:"밝은 거실용 패널 선택",type:"Global",ready:"부분",gap:"결론이 엇갈림(QNED 권장 + OLED도 밝은 환경에 강함). 비교 글은 2024년 모델"},
+ {id:"Q02",q:"Best TV for PS5 and Xbox gaming",ko:"콘솔 게임용 TV",type:"Global",ready:"있음",gap:"게임 사양은 충분. 라인업 비교표가 2025년 모델"},
+ {id:"Q03",q:"What size TV should I get for my viewing distance?",ko:"시청 거리별 크기",type:"Global",ready:"부분",gap:"권장 거리 표는 있으나 공식 단위가 혼재, 연결 제품이 2025년 모델"},
+ {id:"Q04",q:"Is OLED burn-in still a problem in 2026?",ko:"OLED 번인 우려",type:"Global",ready:"없음",gap:"UK 사이트에 번인 페이지 없음 (US에는 있음)"},
+ {id:"Q05",q:"Which TV has the lowest running cost in the UK?",ko:"전기료·에너지 등급",type:"UK 특화",ready:"없음",gap:"가이드에 에너지 내용 없음. 상품 페이지는 SDR 등급(E)만 표시, HDR 등급·소비전력(W) 없음"},
+ {id:"Q06",q:"Best smart TV for Freeview Play / Freely and UK apps",ko:"Freeview Play·Freely",type:"UK 특화",ready:"없음",gap:"상품 페이지·가이드에 언급 없음 (2016년 공지뿐)"},
+ {id:"Q07",q:"Is the premium model worth it over the step-down model?",ko:"상위 vs 하위 모델",type:"Global",ready:"부분",gap:"시리즈 비교표는 좋으나 2025년 모델, 구매 링크 없음"},
+ {id:"Q08",q:"What do I need to wall mount a 65 inch TV?",ko:"65형 벽걸이 설치",type:"UK 특화",ready:"없음",gap:"가이드에 설치 안내 없음. VESA 300×200은 상품 페이지 전체 스펙 안에만 있음"},
+ {id:"Q09",q:"Which TV brand has the best after-sales service in the UK?",ko:"UK 사후 서비스",type:"UK 특화",ready:"부분",gap:"보증 기간만 있고 서비스 품질 내용 없음"},
+ {id:"Q10",q:"Best TV deals this Black Friday",ko:"블랙프라이데이 딜",type:"시즌",ready:"있음",gap:"프로모션 페이지 운영 중"}
+];
+// ChatGPT 1회차의 대표 추천 LG 모델 연도 (관찰 메모에서 정리)
+const GPT_MODEL={Q01:["G5·C5","old"],Q02:["C5 → C6","old"],Q03:["C6",""],Q04:["C6 → C5",""],Q05:["—",""],Q06:["—",""],Q07:["C6·G6",""],Q08:["—",""],Q09:["C5","old"],Q10:["C5 → C6","old"]};
+const CAUSES=[
+ {k:"A",title:"콘텐츠가 신모델을 따라가지 못한다",why:"2026년 C6가 판매 중인데 LG.com 가이드는 2024~2025년 모델에 머물러 있고, AI도 그 모델을 추천한다.",type:"콘텐츠",
+  f:[["F01","TV 라인업 가이드가 2025년 OLED(M5·G5·C5·B5)를 비교. C6는 LG.com/uk와 Currys에서 이미 판매 중",["lineup","c6","curC6"],"확인"],
+     ["F23","OLED evo 목록 페이지의 소개 문단이 2025년 G5 기준으로 작성됨",["plp"],"확인"],
+     ["F24","OLED evo 목록 19개 중 2024년 3개·2025년 8개가 2026년 모델과 섞여 있고, 기본 정렬 첫 상품은 97\" £15,999 모델",["plp"],"확인"],
+     ["F02","QNED vs OLED 비교 글이 2024년 모델로 연결되고 작성일이 없음",["lab"],"확인"],
+     ["F14","ChatGPT가 LG를 추천한 7개 질문 중 4개에서 2025년 C5·G5를 1순위로 제시 (2026년 C6는 후순위 또는 미언급)",[],"부분","ChatGPT 1회차"]]},
+ {k:"B",title:"구매 질문에 답하는 콘텐츠가 없다",why:"제품 기능은 설명하지만, 고객이 실제로 묻는 질문(번인, 밝은 방, 설치)에 결론을 주지 않는다. 그래서 AI는 리뷰 매체를 근거로 쓴다.",type:"콘텐츠",
+  f:[["F03","밝은 방 질문에 대한 결론이 한 페이지 안에서 엇갈림",["tech"],"확인"],
+     ["F04","OLED 번인을 다루는 UK 페이지가 없음. LG US에는 전용 페이지가 있음",["usrel"],"확인"],
+     ["F09","가이드에 벽걸이 설치 안내 없음. VESA 300×200은 상품 페이지 전체 스펙 안에만 있음",["guide","c6"],"확인"],
+     ["F25","C6 상품 페이지의 '자주 묻는 질문'에 제품 질문이 없고, 구독(렌탈) 서비스 안내(사용감·파손 비용·구독 기간)만 있음",["c6"],"확인"],
+     ["F26","홈 히어로 12개 슬라이드 대부분이 프로모션이고, TV 메뉴는 20여 개 기술 라벨(OLED evo, Micro RGB evo, QNED Mini LED 등)로만 나뉨. '밝은 방'·'게임' 같은 고객 상황 진입점 없음",["home"],"확인"],
+     ["F15","LG.com은 10건 중 3건에서 근거로, 1건에서 링크로만 인용. 판단 근거는 What Hi-Fi·RTINGS·Which?",[],"부분","ChatGPT 1회차"],
+     ["F17","에너지 비용·벽걸이 질문에서 LG 미등장 — LG.com에 재료가 없는 질문과 일치",[],"부분","ChatGPT 1회차"],
+     ["F18","밝은 거실 질문 1순위는 Samsung QN90F, LG는 OLED로만 후보",[],"부분","ChatGPT 1회차"]]},
+ {k:"C",title:"UK 고객의 판단 기준이 빠져 있다",why:"Freely·에너지 등급 같은 UK 특화 정보가 없어서, AI가 LG에 불리한 답을 해도 반박할 근거가 없다.",type:"콘텐츠",
+  f:[["F16","ChatGPT가 'LG TV는 Freely를 쓰려면 별도 기기가 필요하다'고 답하고 Hisense·TCL을 추천",[],"가설","ChatGPT 1회차 · 사실 여부 UK 법인 확인 필요"],
+     ["F07","C6 상품 페이지·가이드에 Freeview Play·Freely 언급 없음. Currys에서 경쟁 제품은 제목에 'with Freely' 표기",["c6","feat","curSearch"],"가설","2026년 모델 Freely 지원 여부 확인 필요"],
+     ["F06","C6 상품 페이지는 에너지 등급 E(SDR)만 표시하고 HDR 등급·소비전력은 없음. Currys는 SDR E / HDR G와 소비전력을 함께 표기",["c6","curC6"],"확인","이전 판의 'EUK 표기'는 자동 요약 도구의 오독이라 정정"],
+     ["F22","C6 상품 페이지 스펙의 방송 수신은 'DVB-T2/C/S2'뿐. Freeview·Freely·UK 방송사 앱(iPlayer·ITVX) 표기 없음 — Currys는 UK 앱을 표기",["c6","curC6"],"확인"],
+     ["F20","Currys의 LG 3종 튜너 표기는 'DVB-T2 · Freesat HD'뿐. Philips는 제목·Bullet에 Freely, Sony는 Freeview HD·YouView 표기",["curC6","curSearch"],"확인"]]},
+ {k:"D",title:"같은 제품의 정보가 채널마다 다르다",why:"보증과 모델 코드가 LG.com, Currys, Amazon에서 다르게 표기된다. 하나의 원본(Product Truth)이 없다.",type:"데이터·Feed",
+  f:[["F05","C6 보증 표기가 네 곳에서 다름: 보증 페이지(패널 5년은 G·M·W·Z만) / 홈('5년 OLED 패널 보증', 대상 모델 미표기) / 상품 페이지(보증 링크만) / Currys(5년)",["warranty","home","c6","curC6"],"부분","보증 프로그램 관계 UK 법인 확인 필요"],
+     ["F27","2026년 C6 상품 페이지 리뷰가 4,944건(추천 2,351/2,360)으로 표시. 같은 모델의 Currys 리뷰는 3건 — 이전 세대 리뷰를 통합 표시하는 것으로 보임",["c6","plp"],"가설","리뷰 통합 정책 확인 필요"],
+     ["F28","C6 상품 페이지 각주 'Brightness Booster applies to 66/55/48-inch' — 존재하지 않는 66형 표기, 대상 크기 범위 확인 필요",["c6"],"확인"],
+     ["F30","상품 페이지 구조화 데이터(Product)에 가격·재고는 있으나 평점(aggregateRating)·GTIN이 없고 이미지는 1장",["c6"],"확인"],
+     ["F13","같은 C6 65\"가 OLED65C65LA(LG.com·Amazon), OLED65C64LA·C66LB(Currys)로 판매",["c6","curSearch","amzC6"],"확인"],
+     ["F19","Currys B6 페이지가 첫 화면에는 '5년 보증', 스펙 표에는 '1년'으로 표기",[],"확인","Currys B6 상품 페이지"]]},
+ {k:"E",title:"찾아온 고객을 구매로 연결하지 못한다",why:"가이드와 AI 인용이 카테고리·지원 페이지로 이어지고, 현행 모델의 구매 페이지로 가지 않는다.",type:"콘텐츠",
+  f:[["F08","가이드가 시리즈·카테고리 페이지로만 연결",["guide","lineup","tech"],"확인"],
+     ["F29","/oled-tvs/ 페이지는 제목이 'oled-tvs'이고 상품·제목(H1) 없이 NanoCell·구형 기능 설명과 금융 고지만 노출. 검색·AI가 'OLED TV' 페이지로 가져갈 수 있는 빈 페이지",["oledtvs"],"확인"],
+     ["F14b","ChatGPT가 연결한 유일한 구매 페이지는 2025년 C5 상품 페이지 (번인 질문)",[],"부분","ChatGPT 1회차"]]},
+ {k:"F",title:"3P에서 신뢰 신호와 첫 화면 메시지가 약하다",why:"Currys 검색 상위에 오르지만 리뷰가 적고, 밝은 거실 고객에게 맞는 메시지를 경쟁사가 먼저 보여준다.",type:"복합",
+  f:[["F10","Amazon UK의 LG 2026 OLED는 번들로만 노출, 이미지 1~7장·A+ 없음·리뷰 0건·Q&A 없음, Bullet 절반이 사운드바 설명",["amzSearch","amzC6"],"부분","한국 접속 확인 · UK 재확인 필요"],
+     ["F11","Currys LG 2026 OLED 3개 페이지 리뷰 합계 3건. Sony BRAVIA 8 II 한 페이지는 465건",["curSearch","curC6"],"확인"],
+     ["F12","같은 £1,899의 Samsung S90H는 'Glare Free'와 '영화용 최적' 배지를 첫 화면에, LG C6의 밝은 방 메시지는 'Brightness Booster'뿐",["curC6","curS90H"],"확인"],
+     ["F21","G6의 'Reflection Free Premium'이 Amazon 번들 Bullet에는 있지만 Currys 첫 화면에는 없음 — 채널마다 핵심 USP가 다름",[],"확인","Currys·Amazon G6 상품 페이지"]]}
+];
+const PRIORITY=[
+ {when:"즉시",title:"/oled-tvs/ 빈 페이지 정리",what:"OLED evo 목록으로 리다이렉트하거나 2026 OLED 상품과 소개로 재구성",cause:"E",why:"검색·AI가 가져갈 수 있는 빈 랜딩"},
+ {when:"즉시",title:"Freely 지원 여부 확인과 대응",what:"UK 법인에 2026년 모델의 Freely 지원 여부를 확인. 지원하면 상품 페이지·FAQ·3P 제목에 명시, 미지원이면 제품·영업 과제로 이관",cause:"C",why:"AI가 이미 LG에 불리한 답을 하고 있음"},
+ {when:"즉시",title:"보증 정보 단일 원본 정리",what:"보증 페이지·상품 페이지·리테일러 표기를 하나의 원본으로 맞추고, Currys B6의 '5년 ↔ 1년' 불일치 정정 요청",cause:"D",why:"번인·서비스 질문의 신뢰 근거"},
+ {when:"4주",title:"2026 라인업 가이드 갱신 + 구형 콘텐츠 정리",what:"C6·G6·B6 기준으로 비교표 갱신, 2024~2025 모델로 연결된 글은 갱신 또는 Sunset",cause:"A",why:"AI 추천 모델이 구형에 머무는 원인"},
+ {when:"4주",title:"OLED 번인·보증 Q&A",what:"US 신뢰성 페이지를 현지화하고 UK 보증 조건을 결합",cause:"B",why:"LG.com이 근거로 인용될 수 있는 가장 빠른 질문"},
+ {when:"4주",title:"상품 페이지 FAQ를 제품 FAQ로 교체",what:"구독(렌탈) 서비스 안내를 별도 영역으로 옮기고 번인·보증·Freely·설치(VESA)·에너지 비용 Q&A로 구성. 스펙에 UK 방송·앱·HDR 등급·소비전력 추가",cause:"B",why:"AI가 상품 페이지를 근거로 쓸 재료"},
+ {when:"4주",title:"가이드 → 현행 모델 구매 페이지 연결",what:"모든 가이드의 추천 문단에 2026 모델 상품 페이지 Deep Link",cause:"E",why:"인용·방문을 구매로 연결"},
+ {when:"8주",title:"목록 페이지 정렬·필터·소개 갱신",what:"2026 모델 우선 정렬, 구형 모델 구분 표시, '밝은 방'·'게임'·'에너지 등급' 등 상황 필터, 소개 문단 2026 기준으로 갱신",cause:"A",why:"신모델 탐색 경로 정리"},
+ {when:"8주",title:"상품 구조화 데이터 보강",what:"Product 스키마에 aggregateRating·GTIN·이미지 추가 (리뷰 통합 정책 확인 후)",cause:"D",why:"AI 쇼핑·검색이 읽는 데이터"},
+ {when:"8주",title:"밝은 거실·에너지·벽걸이 질문 답변",what:"결론이 명확한 Buying Guide 보강과 상품 페이지 FAQ 신규",cause:"B",why:"LG 미등장 질문을 줄임"},
+ {when:"4주",title:"Amazon UK LG 리스팅 기본 구성 복구",what:"C6·G6·B6 번들의 이미지 7장 이상, A+ 모듈(밝은 방·게임 수치·보증·UK 앱), TV 중심 Bullet 재작성. 단품 리스팅 존재 여부 UK 환경에서 확인",cause:"F",why:"평균 2.4점으로 가장 낮은 채널"},
+ {when:"8주",title:"Currys 첫 화면 메시지 정렬 + 리뷰 확보",what:"리테일러에 제조사 정보 제공: C6·G6 밝은 방 USP(Reflection Free), Freely·Freeview 표기(지원 시). 신모델 리뷰 프로그램은 영업과 협업",cause:"F",why:"같은 가격 경쟁 제품 대비 선택 이유 확보"}
+];
+const SHELF={currys:[["LG C6 65\" (OLED65C66LB)","LG",""],["LG C6 65\" (OLED65C64LA)","LG","4.3 · 3건"],["Samsung S85H 65\"","",'4.8 · 5건'],["Samsung S95H 65\" Glare Free","","5.0 · 4건"],["LG B6 65\"","LG",""],["LG G6 65\" (Stand)","LG",""],["Sony BRAVIA 8 65\"","","4.6 · 1,035건"],["LG G6 65\" (Wall)","LG",""],["Philips OLED761 65\" with Freely","",""],["Sony BRAVIA 8 II 65\"","","4.5 · 465건"]],
+ amazon:[["[광고] Panasonic 24\" TV","",""],["LG B6 65\" + US40TR 번들","LG",""],["LG B6 65\" + US60T 번들","LG",""],["LG B6 65\" + XO2 번들","LG",""],["LG G6 65\" + US70TR 번들","LG",""],["LG C6 65\" + US60T 번들","LG",""],["LG G6 65\" + US60T 번들","LG",""],["[광고] TV 스탠드","",""],["[광고] TV 스탠드","",""],["LG C6 65\" + XO2 번들","LG",""]]};
+const AIS=[["gaim","Google AI Mode"],["gpt","ChatGPT Search"],["cop","Microsoft Copilot"]];
+const PERSONAS={P2:"프리미엄 업그레이드",P4:"구매 불안 해소",P5:"예산 최적화"};
+const RETAILERS=["Currys","Amazon UK"];
+const MISSIONS={
+ P2:"I'm replacing a 5-year-old TV. I mostly watch films in a dark room in the evening and play on a PS5. Viewing distance is about 2.5m and my budget is up to £2,000. Find a suitable TV on {R}, compare three candidates and recommend one.",
+ P4:"This is my first expensive TV. I care most about real owner reviews, warranty length and what happens if it breaks. Budget up to £1,600. Find a TV on {R} I can buy with confidence, compare three candidates and recommend one.",
+ P5:"I can't decide between a premium model and the step-down model of the same size. I want to know if the difference is worth the price. Budget up to £1,800. On {R}, compare three candidates (ideally both tiers from one brand) and recommend one."};
+
+/* ===================== helpers ===================== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pct=(a,b)=>b?Math.round(a/b*100):0;
+const valPill=v=>v==="확인"?`<span class="pill p-ok">✓ 확인</span>`:v==="부분"?`<span class="pill p-part">◐ 부분 확인</span>`:`<span class="pill p-hyp">○ 가설</span>`;
+const readyPill=v=>v==="있음"?`<span class="pill p-ok">✓ 있음</span>`:v==="부분"?`<span class="pill p-part">◐ 부분</span>`:`<span class="pill p-no">✕ 없음</span>`;
+const stateTxt={R:"추천",M:"언급",L:"목록만",N:"미등장"};
+const citeTxt={basis:"근거로 인용",link:"링크만",none:"없음"};
+const link=k=>`<a href="${SRC[k][1]}" target="_blank" rel="noopener">${esc(SRC[k][0])}</a>`;
+const tip=$("#tip");
+document.addEventListener("pointermove",e=>{const t=e.target.closest("[data-tip]");if(!t){tip.hidden=true;return}tip.textContent=t.dataset.tip;tip.hidden=false;tip.style.left=Math.min(e.clientX+12,innerWidth-tip.offsetWidth-8)+"px";tip.style.top=(e.clientY+14)+"px"});
+
+let OBS=[{"ai": "gpt", "cite": "link", "comp": "Samsung QN90F, TCL C8K, Hisense U8Q", "date": "2026-10-16", "env": "KR 접속 · 비로그인 · 질문에 UK 쇼핑 명시 (탐색용)", "note": "1순위는 Samsung QN90F(Mini LED). LG는 4·5순위로 2025년 G5·C5를 추천 — 2026년 C6·G6가 아님. LG.com은 홈페이지 링크만. 출처: What Hi-Fi, RTINGS, Buyrskip", "obs": "N", "q": "Q01", "run": 1, "savedAt": "2026-10-16T10:40:00Z", "state": "R"}, {"ai": "gpt", "cite": "basis", "comp": "TCL C7K, Samsung S90F", "date": "2026-10-16", "env": "KR 접속 · 비로그인 · 질문에 UK 쇼핑 명시 (탐색용)", "note": "1위 LG C5(2025), 2위 C6. LG.com/uk TV 카테고리 페이지의 55형 가격을 근거로 인용 — 구매 PDP 연결 아님", "obs": "N", "q": "Q02", "run": 1, "savedAt": "2026-10-16T10:40:00Z", "state": "R"}, {"ai": "gpt", "cite": "none", "comp": "TCL P8L, Samsung S99H, Sony BRAVIA 8 II", "date": "2026-10-16", "env": "KR 접속 · 비로그인 · 질문에 UK 쇼핑 명시 (탐색용)", "note": "LG C6 65형을 2순위로 추천. 크기 기준표는 제3자 기준으로 설명, LG.com 사이즈 가이드 인용 없음. 출처: What Hi-Fi", "obs": "N", "q": "Q03", "run": 1, "savedAt": "2026-10-16T10:40:00Z", "state": "R"}, {"ai": "gpt", "cite": "basis", "comp": "Samsung S90F, Samsung S99H, Sony BRAVIA 8 II", "date": "2026-10-16", "env": "KR 접속 · 비로그인 · 질문에 UK 쇼핑 명시 (탐색용)", "note": "1·2위 LG C6·C5. LG.com/uk의 C5(2025) 상품 페이지 스펙·케어 정보를 근거로 인용 — 연결된 구매 페이지가 구형 모델. 출처: RTINGS 번인 테스트, What Hi-Fi", "obs": "Y", "q": "Q04", "run": 1, "savedAt": "2026-10-16T10:40:00Z", "state": "R"}, {"ai": "gpt", "cite": "none", "comp": "Samsung UE24F6000FK, Toshiba 32WF2653DB, Hisense 32A4QTUK", "date": "2026-10-16", "env": "KR 접속 · 비로그인 · 질문에 UK 쇼핑 명시 (탐색용)", "note": "소형 LCD 위주 추천, LG 미등장. 출처: applianceratings.com (UK 에너지 라벨 데이터)", "obs": "N", "q": "Q05", "run": 1, "savedAt": "2026-10-16T10:40:00Z", "state": "N"}, {"ai": "gpt", "cite": "none", "comp": "Hisense 55E6QTUK, TCL 55PF650K, Panasonic TV-65W85BEY, Hisense 65U7STUK PRO", "date": "2026-10-16", "env": "KR 접속 · 비로그인 · 질문에 UK 쇼핑 명시 (탐색용)", "note": "LG·Sony TV는 Freely를 쓰려면 별도 스트리밍 기기가 필요하다고 답변 (정확성 미확인). LG는 webOS 언급만, 추천 후보 없음", "obs": "N", "q": "Q06", "run": 1, "savedAt": "2026-10-16T10:40:00Z", "state": "M"}, {"ai": "gpt", "cite": "none", "comp": "Samsung S90H, Samsung S99H", "date": "2026-10-16", "env": "KR 접속 · 비로그인 · 질문에 UK 쇼핑 명시 (탐색용)", "note": "1·2위 LG C6·G6 (2026 모델 정확). LG.com 인용 없음 — 상·하위 비교 근거는 리뷰 매체. 출처: What Hi-Fi, RTINGS", "obs": "N", "q": "Q07", "run": 1, "savedAt": "2026-10-16T10:40:00Z", "state": "R"}, {"ai": "gpt", "cite": "none", "comp": "Vogel's TVM 3441, One For All WM 5610", "date": "2026-10-16", "env": "KR 접속 · 비로그인 · 질문에 UK 쇼핑 명시 (탐색용)", "note": "브래킷 브랜드만 추천, TV 제조사 정보 인용 없음", "obs": "N", "q": "Q08", "run": 1, "savedAt": "2026-10-16T10:40:00Z", "state": "N"}, {"ai": "gpt", "cite": "basis", "comp": "Sony BRAVIA 7 II, Samsung S90F", "date": "2026-10-16", "env": "KR 접속 · 비로그인 · 질문에 UK 쇼핑 명시 (탐색용)", "note": "브랜드 1순위 LG. LG UK 보증 페이지(12개월, 일부 프리미엄 OLED 패널 5년)를 근거로 인용. Which?(2026년 8월)·Expert Reviews 수상 인용. 추천 모델은 2025년 C5", "obs": "N", "q": "Q09", "run": 1, "savedAt": "2026-10-16T10:40:00Z", "state": "R"}, {"ai": "gpt", "cite": "none", "comp": "Samsung S90F, TCL P8L, Hisense U8Q", "date": "2026-10-16", "env": "KR 접속 · 비로그인 · 질문에 UK 쇼핑 명시 (탐색용)", "note": "1위 LG C5(2025), 5위 C6. 출처: What Hi-Fi, Which?, Tom's Guide", "obs": "N", "q": "Q10", "run": 1, "savedAt": "2026-10-16T10:40:00Z", "state": "R"}],JRN=[],DB=null,CAN_WRITE=false,DB_STATE="정적 공유본";
+const GEO_TOTAL=QS.length*AIS.length*3, J_TOTAL=Object.keys(PERSONAS).length*RETAILERS.length*2;
+const isKR=o=>/^KR/.test(o.env||"");
+const allF=CAUSES.flatMap(c=>c.f.map(f=>({...f,c})));
+
+const VIEWS={
+ frame:{label:"제안 프레임",secs:[["f0","개요"],["f1","P1 정의"],["f2","P2 지표"],["f3","P3 구현 범위"],["f4","P4 핵심 결과"],["f5","P5 한계"],["f6","P6 실행 과제"]]},
+ bu:{label:"사업부별 진단",secs:[["b1","한눈에 보기"],["b2","공통 패턴"],["b3","제품별 상세"],["b4","우선 과제"]]},
+ tv:{label:"TV 심층 사례",secs:[["s0","결론"],["s1","근거 ① LG.com"],["s2","근거 ② AI 답변"],["s3","근거 ③ 3P PDP"],["s4","원인"],["s5","우선 과제"],["s6","다음 단계"]]}};
+let VIEW="frame";
+
+/* ===================== sections ===================== */
+function secConclusion(){
+  const r={"있음":0,"부분":0,"없음":0};QS.forEach(q=>r[q.ready]++);
+  const gpt=OBS.filter(o=>o.ai==="gpt");const rec=gpt.filter(o=>o.state==="R").length, cite=gpt.filter(o=>o.cite!=="none").length;
+  return `<section id="s0"><div class="wrap">
+  <div class="step">LG.com UK · 65" OLED TV · ${AUDIT_DATE} 진단</div>
+  <h1>LG는 AI가 추천하는 브랜드지만, 그 추천의 근거와 모델은 LG.com이 만들지 못하고 있습니다</h1>
+  <p class="lede">고객의 구매 질문 10개를 기준으로 LG.com/uk, AI 검색 답변, 3P 리테일러를 차례로 확인했습니다. 세 곳의 결과는 같은 방향을 가리킵니다. LG는 후보에 오르지만, 고객과 AI가 판단할 때 쓰는 최신 정보와 근거는 LG 밖에서 나옵니다.</p>
+  <div class="claims">
+    <div class="claim"><div class="n">1</div><div><h3>LG.com/uk는 구매 질문 10개 중 ${r["있음"]}개에만 답할 재료가 있습니다</h3><p>번인, 에너지 비용, Freely, 벽걸이 질문에 답하는 페이지가 없습니다. 홈은 프로모션 중심이고, 목록 페이지는 2026 모델이 구형과 섞여 있으며, 상품 페이지의 '자주 묻는 질문'은 제품이 아닌 구독(렌탈) 서비스 안내입니다.</p></div><a class="go" href="#s1">근거 보기 ↓</a></div>
+    <div class="claim"><div class="n">2</div><div><h3>AI는 LG를 ${gpt.length?`${gpt.length}개 질문 중 ${rec}개에서`:"자주"} 추천하지만, 그 절반 이상을 2025년 모델로 추천하고 근거는 리뷰 매체에서 가져옵니다</h3><p>LG.com 인용은 ${gpt.length?`${cite}건`:"소수"}이고, LG.com에 재료가 없는 질문에서는 LG가 아예 등장하지 않습니다. Freely 질문에서는 LG에 불리한 답이 나왔습니다.</p></div><a class="go" href="#s2">근거 보기 ↓</a></div>
+    <div class="claim"><div class="n">3</div><div><h3>3P 상품 페이지는 검색 상위에 오르지만, 선택 이유와 UK 정보에서 밀립니다</h3><p>Currys에서 LG는 구성은 대등하지만 '밝은 방'·'Freely' 메시지와 리뷰에서 뒤지고, 보증 표기가 엇갈립니다. Amazon UK의 LG 리스팅은 이미지·A+·리뷰가 거의 비어 있습니다.</p></div><a class="go" href="#s3">근거 보기 ↓</a></div>
+  </div>
+  <div class="status3">
+    <div><span class="pill p-ok">✓ 실데이터</span><br>LG.com/uk·Currys·Amazon UK 공개 페이지 (${AUDIT_DATE})</div>
+    <div><span class="pill p-part">◐ 탐색용 관찰</span><br>ChatGPT ${gpt.length}건 · 한국 접속, 1회차. Google·Copilot은 보안 확인으로 미실행</div>
+    <div><span class="pill p-hyp">○ 미연결</span><br>GSC·GA4·Seller Center 검증 데이터, 질문 모집단</div>
+  </div>
+  </div></section>`;
+}
+const SITE=[
+ {k:"HOME",title:"홈",url:"home",verdict:"프로모션 중심. TV를 고르는 고객이 시작할 곳이 없습니다",
+  items:[["no","히어로 12개 슬라이드 대부분이 프로모션(Member Days, 캐시백, PayPal, LG Flex). TV 구매 판단 진입점 없음"],
+         ["no","구매 가이드·질문형 진입은 메뉴 안에만 있음"],
+         ["part","TV 메뉴가 20여 개 기술 라벨(OLED evo, OLED, Micro RGB evo, Mini RGB evo, QNED Mini LED…)로만 나뉨. '밝은 방'·'게임' 같은 상황 기준 없음"],
+         ["part","OLED 섹션에 '5년 OLED 패널 보증'을 대상 모델 없이 표기 — 보증 페이지(G·M·W·Z만)와 다름"],
+         ["ok","Which?·What Hi-Fi 수상 배지 슬라이드 1개"],
+         ["no","개인화 추천 'Our Picks'는 세탁기·건조기 중심"]]},
+ {k:"PLP",title:"목록 페이지 (OLED evo)",url:"plp",verdict:"필터는 충분하지만, 2026 모델이 구형과 섞이고 상황별로 고를 수 없습니다",
+  items:[["ok","제목·H1·설명 정상. 크기·가격·게임·시네마·연식·OS·재고 필터, 비교 기능 있음"],
+         ["no","19개 중 2024년 3·2025년 8·2026년 8개 혼재. 기본 정렬 첫 상품은 97\" £15,999"],
+         ["no","소개 문단이 2025년 G5 기준"],
+         ["no","'밝은 방'·에너지 등급·Freely·벽걸이 등 상황 필터 없음. 재고 없음 7개"],
+         ["part","상품 카드: 연식·에너지 등급·평점 표시. 누구에게 맞는지(차별점) 없음"],
+         ["part","상품 목록은 화면에서 스크립트로 그려짐. 구조화 데이터(ItemList)에는 11개가 있으나 65\" C6는 빠짐"],
+         ["no","/oled-tvs/ 주소는 제목 'oled-tvs', 상품 없음, NanoCell·구형 기능 설명과 금융 고지뿐인 빈 페이지"]]},
+ {k:"PDP",title:"상품 페이지 (C6 65\")",url:"c6",verdict:"기능과 수상 근거는 풍부하지만, UK 고객의 판단 질문에는 답하지 않습니다",
+  items:[["ok","제목·H1에 연식, 가격·회원가·재고, 에너지 등급 E, 핵심 특징 3개"],
+         ["ok","Tom's Guide·T3·TechRadar·AVForums 수상 인용 — AI가 인용할 수 있는 제3자 근거"],
+         ["ok","특징·수상·스펙 텍스트가 페이지 원본(HTML)에 있어 AI 크롤러가 읽을 수 있음. AI 봇 차단 없음"],
+         ["ok","VESA 300×200, 보안 업데이트 2030년까지, webOS 5년 업그레이드"],
+         ["no","상품 페이지의 '자주 묻는 질문'에 제품 질문이 없음. 그 자리에 구독(렌탈) 서비스 안내 3개(사용감·파손 시 비용·구독 기간)만 있어 번인·설치·보증 같은 구매 질문에 답하지 못함"],
+         ["no","번인, Freeview·Freely, UK 방송사 앱, HDR 에너지 등급·소비전력 없음 (Currys는 UK 앱·SDR/HDR 등급 표기)"],
+         ["no","보증은 'warranty information' 링크뿐. 홈의 '5년 패널 보증'과 연결 안 됨"],
+         ["part","'Perfect Black and Perfect Colour in any light'로 밝은 방 메시지는 있으나 반사·눈부심 근거 없음. 각주에 '66형' 오기"],
+         ["part","리뷰 4,944건 표시 — 출시 첫해 모델에 이전 세대 리뷰가 통합된 것으로 보임(확인 필요)"],
+         ["part","구조화 데이터: 가격·재고 있음, 평점·GTIN 없음, 이미지 1장"]]}
+];
+const mark={ok:'<span class="mk ok">✓</span>',part:'<span class="mk part">◐</span>',no:'<span class="mk no">✕</span>'};
+function siteBlock(){
+  return `<h3 style="margin-top:36px">홈 → 목록 → 상품 페이지: 구매 여정 단계별 진단</h3>
+  <p class="note" style="margin:0 0 14px">C6 65"를 사는 고객의 경로를 따라 ${AUDIT_DATE}에 화면과 페이지 원본을 확인했습니다. ✓ 잘 된 점 · ◐ 부분 · ✕ 문제.</p>
+  <div class="journey">${SITE.map((st,i)=>{const c={ok:0,part:0,no:0};st.items.forEach(x=>c[x[0]]++);return `<div class="jstage"><div class="jhead"><span class="jk">${i+1} · ${st.k}</span><span class="jc"><span class="mk ok">✓</span>${c.ok} <span class="mk part">◐</span>${c.part} <span class="mk no">✕</span>${c.no}</span></div><h3 style="margin:6px 0 4px">${esc(st.title)}</h3><p class="jv">${esc(st.verdict)}</p><ul class="chk">${st.items.slice().sort((a,b)=>({no:0,part:1,ok:2}[a[0]]-{no:0,part:1,ok:2}[b[0]])).map(x=>`<li>${mark[x[0]]}<span>${esc(x[1])}</span></li>`).join("")}</ul><div class="src note">${link(st.url)}</div></div>`}).join("")}</div>`;
+}
+
+function secReady(){
+  const r={"있음":0,"부분":0,"없음":0};QS.forEach(q=>r[q.ready]++);
+  return `<section id="s1"><div class="wrap">
+  <div class="step">근거 ① · LG.com은 고객의 질문에 답하고 구매로 이끄는가</div>
+  <h2>LG.com/uk에서 답을 찾을 수 있는 질문은 ${r["있음"]}개뿐이고, 홈·목록·상품 페이지 모두 고객 상황이 아닌 제품 기능 중심입니다</h2>
+  <p class="lede">AI가 LG.com을 인용하려면 먼저 LG.com에 답이 있어야 합니다. 먼저 질문별로 답이 되는 페이지가 있는지 보고, 이어서 홈 → 목록 → 상품 페이지 경로를 따라 단계별로 확인했습니다. 질문셋은 초안이며 GSC·Ask LG 데이터로 확정해야 합니다.</p>
+  <div class="kpis">
+    <div class="kpi"><div class="l">답할 재료 있음</div><div class="v">${r["있음"]}<small> / 10</small></div><div class="d">게임, 프로모션</div></div>
+    <div class="kpi"><div class="l">부분</div><div class="v">${r["부분"]}<small> / 10</small></div><div class="d">낡았거나 결론이 흐림</div></div>
+    <div class="kpi"><div class="l">없음</div><div class="v">${r["없음"]}<small> / 10</small></div><div class="d">번인·에너지·Freely·설치</div></div>
+    <div class="kpi"><div class="l">2025년 이전 모델 기준 가이드</div><div class="v">4</div><div class="d">라인업·비교·사이즈·LAB</div></div>
+  </div>
+  <div class="tw"><table><thead><tr><th>ID</th><th>구매 질문</th><th>유형</th><th>준비도</th><th>빠진 것</th></tr></thead><tbody>
+  ${QS.map(q=>`<tr class="${q.ready==="없음"?"hl":""}"><td class="num">${q.id}</td><td style="min-width:220px"><b>${esc(q.ko)}</b><div class="note">${esc(q.q)}</div></td><td class="note" style="white-space:nowrap">${q.type}</td><td>${readyPill(q.ready)}</td><td style="min-width:240px">${esc(q.gap)}</td></tr>`).join("")}
+  </tbody></table></div>
+  ${siteBlock()}
+  </div></section>`;
+}
+function secAI(){
+  const gpt={};OBS.filter(o=>o.ai==="gpt"&&o.run===1).forEach(o=>gpt[o.q]=o);
+  const n=Object.keys(gpt).length;
+  const noReady=QS.filter(q=>q.ready==="없음"), noReadyMiss=noReady.filter(q=>gpt[q.id]&&(gpt[q.id].state==="N"||gpt[q.id].state==="M")).length;
+  return `<section id="s2"><div class="wrap">
+  <div class="step">근거 ② · AI는 실제로 어떻게 답하는가</div>
+  <h2>LG.com에 재료가 없는 질문에서 AI도 LG를 빼거나 불리하게 답했습니다</h2>
+  <p class="lede">같은 질문을 ChatGPT에 물었습니다. 아래 표는 왼쪽에 LG.com 준비도, 오른쪽에 AI 답변을 나란히 놓았습니다. 준비도가 '없음'인 질문 ${noReady.length}개 중 ${noReadyMiss}개에서 LG는 추천되지 않았습니다.</p>
+  ${n?`<div class="tw"><table><thead><tr><th>ID</th><th>질문</th><th>LG.com 준비도</th><th>ChatGPT: LG</th><th>추천된 LG 모델</th><th>LG.com 인용</th><th>먼저 추천된 경쟁 제품</th></tr></thead><tbody>
+  ${QS.map(q=>{const o=gpt[q.id];const m=GPT_MODEL[q.id];return `<tr class="${o&&(o.state==="N"||(o.state==="M"&&q.id==="Q06"))?"hl":""}"><td class="num">${q.id}</td><td style="min-width:150px">${esc(q.ko)}</td><td>${readyPill(q.ready)}</td><td style="white-space:nowrap">${o?`<i class="dot ${o.state}"></i> ${stateTxt[o.state]}`:'<i class="dot E"></i> 미입력'}</td><td>${o&&m[0]!=="—"?`<span class="yr ${m[1]}">${m[0]}</span>`:'<span class="note">—</span>'}</td><td style="white-space:nowrap">${o?citeTxt[o.cite]:""}</td><td style="min-width:180px" class="note">${o?esc(o.comp):""}</td></tr>`}).join("")}
+  </tbody></table></div>
+  <p class="note" style="margin-top:8px">빨간 연도 표시 = 2026년 C6가 판매 중인데 2025년 모델을 대표로 추천한 경우. 화살표는 추천 순서입니다.</p>
+  <div class="callout"><b>가장 위험한 답변 (Q06):</b> ChatGPT는 "LG TV로 Freely를 쓰려면 별도 스트리밍 기기가 필요하다"고 답하고 Hisense·TCL·Panasonic을 추천했습니다. LG.com에 Freely 정보가 없어 이 답변을 확인하거나 반박할 근거가 없습니다. 사실 여부는 UK 법인 확인이 필요합니다.</div>`:`<div class="empty">아직 관찰이 없습니다.</div>`}
+  <div class="caveat">한국에서 로그인하지 않은 상태로, 질문 앞에 "UK에서 쇼핑 중"이라고 명시해 1회 실행한 결과입니다. 패턴을 보여주는 근거로는 쓸 수 있지만 수치는 확정이 아닙니다. Google AI Mode는 보안 확인, Copilot은 사람 확인 단계에서 막혀 실행하지 못했습니다. 관찰 원문은 아래 '관찰 원문 보기'에 있습니다.</div>
+  ${OBS.length?`<details class="cause" style="margin-top:12px"><summary><span class="ltr">＋</span><div><h3>관찰 원문 보기</h3><p class="why">질문별로 ChatGPT가 추천한 LG 모델, 먼저 추천한 경쟁 제품, 인용 출처 메모</p></div><span class="cnt">${OBS.length}건 ▾</span></summary>
+   <div class="body" style="padding-left:18px"><div class="tw"><table><thead><tr><th>질문</th><th>LG</th><th>LG.com 인용</th><th>먼저 추천된 경쟁 제품</th><th>메모</th></tr></thead><tbody>${OBS.slice().sort((a,b)=>(a.q+a.ai+a.run).localeCompare(b.q+b.ai+b.run)).map(o=>`<tr><td class="num" style="white-space:nowrap">${esc(o.q)} · ${esc((QS.find(q=>q.id===o.q)||{}).ko||"")}</td><td style="white-space:nowrap"><i class="dot ${o.state}"></i> ${stateTxt[o.state]||""}</td><td style="white-space:nowrap">${citeTxt[o.cite]||""}</td><td style="min-width:160px">${esc(o.comp)}</td><td style="min-width:280px">${esc(o.note)}</td></tr>`).join("")}</tbody></table></div></div></details>`:""}
+  </div></section>`;
+}
+/* ===================== 3P PDP 진단 (2026-10-16, 상품 페이지 직접 추출) ===================== */
+const CRIT=[["find","검색 노출","Findability"],["comp","구성 완성도","Completeness"],["dec","구매 판단 정보","Decision coverage"],["truth","정보 정확성","Product truth"],["pers","선택 이유","Persuasiveness"],["local","UK 현지 정보","Local relevance"],["fresh","최신성","Freshness"],["frict","신뢰·마찰","Purchase friction"]];
+const PDPS=[
+ {id:"C-LG-C6",ch:"Currys",lg:true,name:"LG C6 65\" (OLED65C64LA)",price:"£1,899",url:"https://www.currys.co.uk/products/lg-c6-65-oled-ai-4k-hdr-smart-tv-2026-oled65c64la-10301788.html",
+  s:{find:5,comp:4,dec:3,truth:3,pers:4,local:3,fresh:5,frict:2},
+  ev:{rank:"검색 1·2위",bullets:"6개 · 프로세서 → 밝기 → 165Hz → HDMI 2.1 ×4 → 5년 보증 → webOS",imgs:"15장",reviews:"4.3 · 3건",badge:"Currys 전문가 평가 '게임용 최적'",energy:"SDR E / HDR G",guar:"5년 (LG 보증 페이지는 패널 5년을 G·M·W·Z에만 명시)",tuner:"DVB-T2 · Freesat HD (Freeview·Freely 표기 없음)",apps:"BBC iPlayer · ITVX · Channel 4 · 5",miss:"번인·시청 거리·밝은 방 눈부심 정보 없음"}},
+ {id:"C-LG-G6",ch:"Currys",lg:true,name:"LG G6 65\" Stand (OLED65G66LS)",price:"£2,699",url:"https://www.currys.co.uk/products/lg-g6-65-oled-ai-4k-hdr-smart-tv-2026-stand-version-oled65g66ls-10301977.html",
+  s:{find:4,comp:4,dec:3,truth:5,pers:3,local:3,fresh:5,frict:1},
+  ev:{rank:"검색 6위",bullets:"6개 · 프로세서 → Brightness Booster Ultra → 165Hz → HDMI 2.1 ×4 → 5년 보증 → webOS",imgs:"15장",reviews:"0건",badge:"없음",energy:"SDR E / HDR G",guar:"5년",tuner:"DVB-T2 · Freesat HD (Freeview·Freely 표기 없음)",apps:"BBC iPlayer · ITVX · Channel 4 · 5",miss:"Amazon 번들에는 있는 'Reflection Free Premium'이 Currys 첫 화면에 없음"}},
+ {id:"C-LG-B6",ch:"Currys",lg:true,name:"LG B6 65\" (OLED65B65LA)",price:"£1,599",url:"https://www.currys.co.uk/products/lg-b6-65-oled-ai-4k-hdr-smart-tv-2026-oled65b65la-10301900.html",
+  s:{find:4,comp:4,dec:3,truth:2,pers:2,local:3,fresh:5,frict:1},
+  ev:{rank:"검색 5위",bullets:"6개 · 프로세서 → Perfect Black → 120Hz → 5년 보증 → webOS → HDR 포맷",imgs:"14장",reviews:"0건",badge:"없음",energy:"SDR F / HDR G",guar:"첫 화면 '5년 보증' ↔ 스펙 표 '1년' — 같은 페이지 안에서 불일치",tuner:"DVB-T2 · Freesat HD (Freeview·Freely 표기 없음)",apps:"BBC iPlayer · ITVX · Channel 4 · 5",miss:"상위 모델(C6) 대비 무엇을 포기하는지 설명 없음"}},
+ {id:"C-SS-S90H",ch:"Currys",lg:false,name:"Samsung S90H 65\" (QE65S90H)",price:"£1,899",url:"https://www.currys.co.uk/products/samsung-s90h-65-oled-glare-free-4k-vision-ai-smart-tv-2026-qe65s90h-10304096.html",
+  s:{find:3,comp:4,dec:4,truth:5,pers:5,local:2,fresh:5,frict:1},
+  ev:{rank:"검색 11위",bullets:"6개 · 프로세서 → Glare Free → 165Hz → HDMI 2.1 ×4 → 5년 보증 → Smart TV",imgs:"13장",reviews:"5.0 · 1건",badge:"Currys 전문가 평가 '영화용 최적'",energy:"SDR E / HDR G",guar:"5년",tuner:"DVB-T2 · Freesat HD · Samsung TV Plus",apps:"UK 방송사 앱 표기 없음",miss:"—"}},
+ {id:"C-SO-B8II",ch:"Currys",lg:false,name:"Sony BRAVIA 8 II 65\" (K65XR8M25B)",price:"£2,399",url:"https://www.currys.co.uk/products/sony-bravia-8-ii-65-qdoled-4k-hdr-ai-smart-tv-k65xr8m25b-10282242.html",
+  s:{find:3,comp:5,dec:3,truth:5,pers:4,local:4,fresh:4,frict:5},
+  ev:{rank:"검색 10위",bullets:"6개 · QD-OLED 색 → 프로세서 → 120Hz → HDMI 2.1 ×2 → 5년 보증 → 영화 10편 제공",imgs:"24장",reviews:"4.5 · 465건",badge:"Currys 전문가 평가 '사운드 최적'",energy:"SDR F / HDR G",guar:"5년 (신청형)",tuner:"Freeview HD ×2 · YouView 7일 다시보기",apps:"BBC iPlayer 등",miss:"밝은 방 정보 없음"}},
+ {id:"C-PH-761",ch:"Currys",lg:false,name:"Philips OLED761 65\" with Freely",price:"£1,499",url:"https://www.currys.co.uk/products/philips-ambilight-oled761-65-oled-4k-hdr-smart-tv-2026-with-freely-65oled76105-10309742.html",
+  s:{find:3,comp:4,dec:3,truth:5,pers:4,local:5,fresh:5,frict:1},
+  ev:{rank:"검색 9위",bullets:"6개 · Ambilight → Dolby Atmos → 120Hz → HDMI 2.1 ×4 → 2년 보증 → Freely",imgs:"16장",reviews:"0건",badge:"없음",energy:"SDR F / HDR F",guar:"2년",tuner:"Freeview HD · Freeview Play · Freely (제목·Bullet에 명시)",apps:"BBC iPlayer 등",miss:"—"}},
+ {id:"A-LG-C6",ch:"Amazon UK",lg:true,name:"LG C6 65\" + US60T 번들",price:"—",url:"https://www.amazon.co.uk/dp/B0GVDRNCYF",
+  s:{find:3,comp:1,dec:2,truth:3,pers:2,local:2,fresh:4,frict:1},
+  ev:{rank:"번들로만 노출",bullets:"8개 · 게임은 'Ultimate Gaming experience' (수치 없음), 절반은 사운드바 설명",imgs:"1장",reviews:"0건 · Q&A 없음",badge:"—",energy:"표기 없음",guar:"표기 없음",tuner:"표기 없음",apps:"표기 없음",miss:"A+ 콘텐츠 없음"}},
+ {id:"A-LG-G6",ch:"Amazon UK",lg:true,name:"LG G6 65\" Wall + US70TR 번들",price:"—",url:"https://www.amazon.co.uk/dp/B0GVDJ342L",
+  s:{find:3,comp:2,dec:3,truth:3,pers:3,local:2,fresh:4,frict:1},
+  ev:{rank:"번들로만 노출",bullets:"8개 · Reflection Free Premium, 벽걸이 일체형, VRR/ALLM 포함",imgs:"7장",reviews:"0건 · Q&A 없음",badge:"—",energy:"표기 없음",guar:"표기 없음",tuner:"표기 없음",apps:"표기 없음",miss:"A+ 콘텐츠 없음"}},
+ {id:"A-LG-B6",ch:"Amazon UK",lg:true,name:"LG B6 65\" + US40TR 번들",price:"—",url:"https://www.amazon.co.uk/dp/B0GVDJZL4L",
+  s:{find:3,comp:1,dec:2,truth:3,pers:2,local:2,fresh:4,frict:1},
+  ev:{rank:"번들로만 노출",bullets:"8개 · 게임은 'Incredible Gaming experience' (수치 없음), 절반은 사운드바 설명",imgs:"2장",reviews:"0건 · Q&A 없음",badge:"—",energy:"표기 없음",guar:"표기 없음",tuner:"표기 없음",apps:"표기 없음",miss:"A+ 콘텐츠 없음"}}
+];
+const RUBRIC=[["검색 노출","'65 inch oled tv' 검색 순위. 5 = 상위 3위, 3 = 10위 안팎 또는 번들로만 노출"],["구성 완성도","Bullet·이미지 수·제품 설명·스펙 표·A+. 1 = 이미지 1~2장·A+ 없음, 5 = 이미지 20장 이상·설명·스펙 완비"],["구매 판단 정보","밝은 방·게임·보증·설치(VESA)·번인·크기 중 답하는 항목 수"],["정보 정확성","같은 페이지·채널 간 보증·스펙 표기 일치 여부"],["선택 이유","첫 화면에서 고객 상황에 맞는 선택 이유를 주는가 (전문가 배지, 상황형 메시지)"],["UK 현지 정보","Freeview·Freely, UK 방송사 앱, 에너지 등급, UK 보증 표기"],["최신성","현행 모델·연식 표기, 단종 정보 잔존 여부"],["신뢰·마찰","리뷰 수, Q&A 응답. 1 = 리뷰 0~1건, 5 = 수백 건"]];
+const avg=o=>CRIT.reduce((a,c)=>a+o.s[c[0]],0)/CRIT.length;
+function secPDP(){
+  const cur=PDPS.filter(p=>p.ch==="Currys"), lgC=cur.filter(p=>p.lg), coC=cur.filter(p=>!p.lg), amz=PDPS.filter(p=>p.ch!=="Currys");
+  const m=(arr,k)=>arr.reduce((a,p)=>a+p.s[k],0)/arr.length;
+  const gaps=CRIT.map(c=>({k:c[0],l:c[1],lg:m(lgC,c[0]),co:m(coC,c[0]),az:m(amz,c[0])}));
+  const cell=v=>`<td class="sc s${v}">${v}</td>`;
+  const bar=(v,cls)=>`<div class="gtrack"><div class="gbar ${cls}" style="width:${v/5*100}%"></div></div>`;
+  return `<section id="s3"><div class="wrap">
+  <div class="step">근거 ③ · 3P 상품 페이지는 선택을 끌어내는가</div>
+  <h2>Currys에서는 구조는 대등하지만 '선택 이유'와 'UK 정보'에서 밀리고, Amazon UK에서는 기본 구성부터 비어 있습니다</h2>
+  <p class="lede">Currys의 LG 2026 OLED 3종과 같은 크기의 경쟁 제품 3종, Amazon UK의 LG 리스팅 3종을 같은 8개 기준으로 채점했습니다. 상품 페이지에서 직접 추출한 사실만 근거로 썼고, 점수 기준은 표 아래에 있습니다.</p>
+  ${GLOSS}
+  <div class="kpis">
+    <div class="kpi"><div class="l">Currys LG 평균</div><div class="v">${(lgC.reduce((a,p)=>a+avg(p),0)/lgC.length).toFixed(1)}<small> / 5</small></div><div class="d">C6·G6·B6</div></div>
+    <div class="kpi"><div class="l">Currys 경쟁 평균</div><div class="v">${(coC.reduce((a,p)=>a+avg(p),0)/coC.length).toFixed(1)}<small> / 5</small></div><div class="d">Samsung·Sony·Philips</div></div>
+    <div class="kpi"><div class="l">Amazon UK LG 평균</div><div class="v">${(amz.reduce((a,p)=>a+avg(p),0)/amz.length).toFixed(1)}<small> / 5</small></div><div class="d">번들 리스팅 3종</div></div>
+    <div class="kpi"><div class="l">리뷰 (LG 2026 6개 페이지 합계)</div><div class="v">3<small>건</small></div><div class="d">Sony BRAVIA 8 II 한 페이지 465건</div></div>
+  </div>
+  <h3>기준별 비교 — 어디서 지고 있는가</h3>
+  <div class="legend"><span><i class="sw" style="background:var(--accent)"></i>Currys LG</span><span><i class="sw" style="background:#8E8893"></i>Currys 경쟁</span><span><i class="sw" style="background:#E7B3C4"></i>Amazon UK LG</span></div>
+  <div class="gap">${gaps.map(g=>{const d=g.lg-g.co;return `<div class="grow"><div class="gl">${g.l}</div><div class="gb" data-tip="${g.l} — Currys LG ${g.lg.toFixed(1)} · 경쟁 ${g.co.toFixed(1)} · Amazon LG ${g.az.toFixed(1)}">${bar(g.lg,"lg")}${bar(g.co,"co")}${bar(g.az,"az")}</div><div class="gd ${d<-0.4?"neg":d>0.4?"pos":""}">${d>0?"+":""}${d.toFixed(1)}</div></div>`}).join("")}</div>
+  <p class="note">오른쪽 숫자는 Currys에서 LG − 경쟁 평균. 빨간색이 LG가 뒤지는 기준입니다.</p>
+  <h3 style="margin-top:28px">페이지별 점수</h3>
+  <div class="tw"><table class="score"><thead><tr><th>채널</th><th>상품</th>${CRIT.map(c=>`<th title="${c[2]}">${c[1]}</th>`).join("")}<th>평균</th></tr></thead><tbody>
+  ${PDPS.map(p=>`<tr class="${p.lg?"lg":""}"><td class="note" style="white-space:nowrap">${p.ch}</td><td style="min-width:200px"><a href="${p.url}" target="_blank" rel="noopener">${esc(p.name)}</a><div class="note">${p.price}</div></td>${CRIT.map(c=>cell(p.s[c[0]])).join("")}<td class="num" style="font-weight:700">${avg(p).toFixed(1)}</td></tr>`).join("")}
+  </tbody></table></div>
+  <div class="two" style="margin-top:24px">
+    <div class="box"><h3>발견 1 · 같은 가격, 다른 첫 메시지</h3><p style="margin:0">£1,899의 C6와 S90H는 스펙과 보증이 같습니다. S90H는 두 번째 줄에 'Glare Free'를 두고 Currys 전문가 평가 '영화용 최적'을 받았습니다. C6의 밝은 방 메시지는 'Brightness Booster'뿐이고, G6의 'Reflection Free Premium'은 Amazon에는 있지만 Currys 첫 화면에는 없습니다.</p></div>
+    <div class="box"><h3>발견 2 · Freely·Freeview를 쓰지 않는다</h3><p style="margin:0">LG 3종의 튜너 표기는 'DVB-T2 · Freesat HD'뿐입니다. Philips는 제목과 Bullet에 'Freely'를, Sony는 'Freeview HD · YouView'를 씁니다. ChatGPT가 'LG는 Freely에 별도 기기가 필요하다'고 답한 것과 같은 방향의 정황입니다.</p></div>
+    <div class="box"><h3>발견 3 · 같은 페이지 안에서 보증이 다르다</h3><p style="margin:0">B6 페이지 첫 화면은 '5년 보증', 스펙 표는 '1년'입니다. C6는 Currys에서 5년이지만, LG 보증 페이지는 패널 5년을 G·M·W·Z 시리즈에만 명시합니다.</p></div>
+    <div class="box"><h3>발견 4 · Amazon UK 리스팅은 기본이 비어 있다</h3><p style="margin:0">LG 2026 OLED는 사운드바 번들로만 보이고, 이미지 1~7장, A+ 없음, 리뷰 0건, Q&A 없음입니다. Bullet 절반은 사운드바 설명이고 게임 특징은 수치 없이 표현됩니다.</p></div>
+  </div>
+  <details class="cause" style="margin-top:20px"><summary><span class="ltr">＋</span><div><h3>페이지별 근거 원자료</h3><p class="why">Bullet 순서, 이미지·리뷰 수, 에너지 등급, 보증, 튜너, 빠진 정보</p></div><span class="cnt">${PDPS.length}개 페이지 ▾</span></summary>
+    <div class="body" style="padding-left:18px"><div class="tw"><table><thead><tr><th>상품</th><th>Bullet (순서)</th><th>이미지</th><th>리뷰</th><th>에너지</th><th>보증</th><th>튜너·방송</th><th>빠진 정보</th></tr></thead><tbody>
+    ${PDPS.map(p=>`<tr class="${p.lg?"lg":""}"><td style="min-width:150px"><b>${esc(p.name)}</b><div class="note">${p.ch} · ${esc(p.ev.rank)}${p.ev.badge&&p.ev.badge!=="없음"&&p.ev.badge!=="—"?"<br>"+esc(p.ev.badge):""}</div></td><td style="min-width:240px">${esc(p.ev.bullets)}</td><td class="num">${esc(p.ev.imgs)}</td><td class="num" style="white-space:nowrap">${esc(p.ev.reviews)}</td><td style="white-space:nowrap">${esc(p.ev.energy)}</td><td style="min-width:160px">${esc(p.ev.guar)}</td><td style="min-width:170px">${esc(p.ev.tuner)}</td><td style="min-width:170px">${esc(p.ev.miss)}</td></tr>`).join("")}
+    </tbody></table></div></div></details>
+  <details class="cause" style="margin-top:12px"><summary><span class="ltr">＋</span><div><h3>채점 기준</h3><p class="why">8개 기준, 1~5점. 사실 체크리스트에 따라 매겼고 '선택 이유'만 판단이 들어갑니다(의견).</p></div><span class="cnt">▾</span></summary>
+    <div class="body" style="padding-left:18px"><div class="tw"><table><tbody>${RUBRIC.map(r=>`<tr><td style="white-space:nowrap"><b>${r[0]}</b></td><td>${r[1]}</td></tr>`).join("")}</tbody></table></div></div></details>
+  <div class="caveat">${AUDIT_DATE}에 한국에서 접속해 확인했습니다. 상품 페이지 내용은 그대로 유효하지만 검색 순위·가격·Amazon 노출 상품은 접속 위치에 따라 다를 수 있습니다. 점수는 6개 페이지 비교용이며 전 SKU 대표값이 아닙니다.</div>
+  </div></section>`;
+}
+
+function secCauses(){
+  return `<section id="s4"><div class="wrap">
+  <div class="step">원인 · 왜 이런 결과가 나오는가</div>
+  <h2>세 곳에서 본 문제는 여섯 가지 원인으로 묶입니다</h2>
+  <p class="lede">발견 ${allF.length}건을 원인별로 정리했습니다. 각 원인을 열면 근거가 된 사실과 출처가 나옵니다. D는 데이터 정합성, F는 영업·운영과 함께 풀어야 하는 과제입니다.</p>
+  <div class="causes">${CAUSES.map((c,i)=>`<details class="cause"${i<2?" open":""}><summary><span class="ltr">${c.k}</span><div><h3>${esc(c.title)}</h3><p class="why">${esc(c.why)}</p></div><span class="cnt">${c.type} · ${c.f.length}건 ▾</span></summary>
+    <div class="body">${c.f.map(f=>`<div class="fd"><span class="id">${f[0].replace("b","")}</span><div>${esc(f[1])} ${valPill(f[3])}${f[4]?` <span class="note">· ${esc(f[4])}</span>`:""}${f[2].length?`<div class="src">${f[2].map(link).join(" · ")}</div>`:""}</div></div>`).join("")}</div></details>`).join("")}</div>
+  </div></section>`;
+}
+function secPriority(){
+  return `<section id="s5"><div class="wrap">
+  <div class="step">우선 과제 · 무엇부터 할 것인가</div>
+  <h2>위험을 막는 일부터, 그다음 AI가 LG.com을 근거로 쓰게 만드는 일</h2>
+  <p class="lede">순서는 위험도와 실행 속도를 기준으로 정했습니다(의견). 각 과제 오른쪽은 연결된 원인입니다.</p>
+  <div class="pri">${PRIORITY.map(p=>`<div class="prow"><div class="when">${p.when}</div><div><h3>${esc(p.title)}</h3><div class="m">${esc(p.what)}</div></div><div class="r">원인 ${p.cause} · ${esc(CAUSES.find(c=>c.k===p.cause).title)}<br><span class="note">${esc(p.why)}</span></div></div>`).join("")}</div>
+  </div></section>`;
+}
+function secNext(){
+  return `<section id="s6"><div class="wrap">
+  <div class="step">다음 단계 · 결론을 확정하려면</div>
+  <h2>지금 결과는 방향을 보여주고, 확정에는 네 가지가 더 필요합니다</h2>
+  <div class="next" style="margin-top:16px">
+    <div class="box"><h3><span class="pill p-part">1</span> UK 환경 반복 관찰</h3><p class="note">UK 담당자가 같은 질문을 Google AI Mode·ChatGPT·Copilot에서 서로 다른 날짜에 3회 실행해 결과를 기록합니다.</p></div>
+    <div class="box"><h3><span class="pill p-part">2</span> UK 법인 확인 2건</h3><p class="note">2026년 모델의 Freely 지원 여부, 보증 프로그램(5년 패널 보증·OLED Care+·리테일러 5년) 관계.</p></div>
+    <div class="box"><h3><span class="pill p-part">3</span> 질문셋 확정</h3><p class="note">GSC Non-brand 쿼리, LG.com 내부 검색, Ask LG 데이터로 10개 초안 질문을 실제 수요 기준으로 교체·보강.</p></div>
+    <div class="box"><h3><span class="pill p-part">4</span> 3P 여정 재현과 검증</h3><p class="note">페르소나 3종 × Currys·Amazon UK × 2회 여정 재현, Seller Center 전환 데이터로 가설 검증.</p></div>
+  </div>
+  </div></section>`;
+}
+function secInput(){
+  const byKey={};OBS.forEach(o=>byKey[o.q+"_"+o.ai+"_"+o.run]=o);
+  return `<section id="s7"><div class="wrap">
+  <div class="step">부록 · 데이터 입력과 원자료</div>
+  <h2>관찰을 입력하면 위의 결론과 표가 함께 갱신됩니다</h2>
+  <p class="lede">AI 관찰 ${OBS.length}/${GEO_TOTAL} · 3P 여정 ${JRN.length}/${J_TOTAL}. 같은 질문·서비스·회차를 다시 저장하면 덮어씁니다. ${DB?"":esc(DB_STATE)+"."}</p>
+  <div class="box" style="margin-bottom:16px"><h3>AI 관찰 진행 현황</h3>
+    <div class="tw" style="border:0"><table><thead><tr><th>ID</th><th>질문</th>${AIS.map(a=>`<th>${a[1]}</th>`).join("")}</tr></thead><tbody>
+    ${QS.map(q=>`<tr><td class="num">${q.id}</td><td>${esc(q.ko)}</td>${AIS.map(([k,l])=>`<td>${[1,2,3].map(r=>{const o=byKey[q.id+"_"+k+"_"+r];return o?`<i class="dot ${o.state}" data-tip="${l} ${r}회차 (${o.date}${isKR(o)?", 한국 접속":""}): ${stateTxt[o.state]}"></i>`:`<i class="dot E" data-tip="${l} ${r}회차: 미입력"></i>`}).join(" ")}</td>`).join("")}</tr>`).join("")}
+    </tbody></table></div></div>
+  <div class="two">
+    <div class="box"><h3>AI 관찰 입력</h3>${!DB?`<div class="empty">${esc(DB_STATE)}</div>`:!CAN_WRITE?`<div class="empty">보기 권한이라 입력할 수 없습니다. 소유자에게 Contributor 이상 권한을 요청하세요.</div>`:`<form class="rec" id="geoForm">
+      <label class="f">질문<select id="g_q">${QS.map(q=>`<option value="${q.id}">${q.id} · ${esc(q.ko)}</option>`).join("")}</select></label>
+      <label class="f">AI 서비스<select id="g_ai">${AIS.map(a=>`<option value="${a[0]}">${a[1]}</option>`).join("")}</select></label>
+      <label class="f">회차<select id="g_run"><option>1</option><option>2</option><option>3</option></select></label>
+      <label class="f">관찰일<input id="g_date" type="date" required></label>
+      <label class="f">LG 등장<select id="g_state"><option value="R">추천 후보로 제시</option><option value="M">의미 있게 언급</option><option value="L">목록에만 등장</option><option value="N">등장 안 함</option></select></label>
+      <label class="f">LG.com 인용<select id="g_cite"><option value="none">없음</option><option value="link">링크만</option><option value="basis">답변 근거로 인용</option></select></label>
+      <label class="f">구매 페이지 연결<select id="g_obs"><option value="N">아니오</option><option value="Y">예</option></select></label>
+      <label class="f">실행 조건<input id="g_env" value="UK · 비로그인 · Desktop"></label>
+      <label class="f full">먼저 추천된 경쟁 제품<input id="g_comp"></label>
+      <label class="f full">메모 (추천된 LG 모델, 오류, 인용 출처)<textarea id="g_note"></textarea></label>
+      <div class="full" style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" type="submit" id="g_save">관찰 저장</button><button class="btn ghost" type="button" id="g_copy">질문 원문 복사</button><span class="status" id="g_status"></span></div>
+    </form>`}</div>
+    <div class="box"><h3>3P 여정 입력</h3>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px"><select id="m_p" style="width:auto">${Object.entries(PERSONAS).map(([k,v])=>`<option value="${k}">${k} ${v}</option>`).join("")}</select><select id="m_r" style="width:auto">${RETAILERS.map(r=>`<option>${r}</option>`).join("")}</select><button class="btn ghost" id="m_copy" type="button">미션 복사</button></div>
+      <div class="mission" id="m_text" style="margin-bottom:12px"></div>
+      ${!DB||!CAN_WRITE?"":`<form class="rec" id="jForm">
+      <label class="f">회차<select id="j_run"><option>1</option><option>2</option></select></label>
+      <label class="f">실행일<input id="j_date" type="date" required></label>
+      <label class="f">LG 최고 검색 순위<input id="j_rank" type="number" min="1" placeholder="10위 밖이면 비움"></label>
+      <label class="f">LG 도달 단계<select id="j_stage"><option value="none">노출 안 됨</option><option value="found">노출만</option><option value="short">Shortlist</option><option value="pdp">PDP 후 탈락</option><option value="rec">최종 추천</option></select></label>
+      <label class="f full">최종 추천 제품<input id="j_win"></label>
+      <label class="f full">LG 탈락 이유 (AI 판단 근거)<textarea id="j_why"></textarea></label>
+      <div class="full" style="display:flex;gap:10px"><button class="btn" type="submit" id="j_save">여정 저장</button><span class="status" id="j_status"></span></div>
+      </form>`}
+    </div>
+  </div>
+  <div class="box" style="margin-top:16px"><h3>관찰 원자료 <span class="note num">${OBS.length}건</span></h3>
+  ${OBS.length?`<div class="tw"><table><thead><tr><th>질문</th><th>서비스·회차</th><th>LG</th><th>LG.com 인용</th><th>메모</th><th>실행 조건</th></tr></thead><tbody>${OBS.slice().sort((a,b)=>(a.q+a.ai+a.run).localeCompare(b.q+b.ai+b.run)).map(o=>`<tr><td class="num">${esc(o.q)}</td><td style="white-space:nowrap">${esc((AIS.find(a=>a[0]===o.ai)||[,o.ai])[1])} · ${o.run}회<br><span class="note num">${esc(o.date)}</span></td><td style="white-space:nowrap"><i class="dot ${o.state}"></i> ${stateTxt[o.state]||""}</td><td style="white-space:nowrap">${citeTxt[o.cite]||""}${o.obs==="Y"?"<br><span class='note'>구매 페이지 연결</span>":""}</td><td style="min-width:280px">${esc(o.note)}</td><td class="note" style="min-width:140px">${esc(o.env)}</td></tr>`).join("")}</tbody></table></div>`:`<div class="empty">아직 관찰이 없습니다.</div>`}</div>
+  ${JRN.length?`<div class="box" style="margin-top:16px"><h3>3P 여정 원자료</h3><div class="tw"><table><thead><tr><th>여정</th><th>실행일</th><th>LG 순위</th><th>LG 도달</th><th>최종 추천</th><th>탈락 이유</th></tr></thead><tbody>${JRN.map(j=>`<tr><td class="num">${j.p} · ${esc(j.r)} · ${j.run}회</td><td class="num">${esc(j.date)}</td><td class="num">${j.rank||"10위 밖"}</td><td>${{none:"노출 안 됨",found:"노출만",short:"Shortlist",pdp:"PDP 후 탈락",rec:"추천"}[j.stage]||""}</td><td>${esc(j.win)}</td><td>${esc(j.why)}</td></tr>`).join("")}</tbody></table></div></div>`:""}
+  <div class="box" style="margin-top:16px"><h3>출처</h3><div class="srcs">${Object.keys(SRC).map(k=>`<div>${link(k)}</div>`).join("")}</div></div>
+  </div></section>`;
+}
+
+/* ===================== Part A · 제안 프레임 + 사업부별 진단 ===================== */
+const BU_DATE="2026-10-19";
+const T=(head,rows,cls)=>`<div class="tw"><table class="${cls||""}"><thead><tr>${head.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr${r._cls?` class="${r._cls}"`:""}>${(r.cells||r).map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+const tag=(t,c)=>`<span class="pill ${c||"p-hyp"}">${t}</span>`;
+
+function secFrameHero(){
+  return `<section id="f0" class="hero"><div class="wrap">
+  <div class="step">LG전자 D2C 콘텐츠 제안 · UK 파일럿 기반</div>
+  <h1>진단이 가리키는 과제는 같습니다. 달라지는 것은 속도, 범위, 정확도입니다</h1>
+  <p class="lede">가이드, FAQ, 차별화 콘텐츠. 디지털 미스터리 쇼퍼가 찾아낸 과제는 지금 진행하고 있는 과제와 크게 다르지 않습니다. 핵심은 그 과제를 찾아내는 방식입니다. AI를 활용하면 더 빠르게, 사람이 보기 어려웠던 곳까지, 사람의 실수 없이 찾아낼 수 있습니다.</p>
+  <div class="pillars">
+    <div class="pillar"><span class="pk">01</span><h3>속도</h3><p class="pm">사람이 며칠 걸려 하던 점검을 하루 안에</p><p class="pe">사업부별 Most Popular 6개 제품을 LG.com·Currys·Amazon UK·ChatGPT 4개 채널에서 하루 만에 진단했습니다. 같은 방식으로 국가·제품을 늘리거나, 신모델 출시마다 다시 돌릴 수 있습니다.</p></div>
+    <div class="pillar"><span class="pk">02</span><h3>범위 확대</h3><p class="pm">화면 뒤와 AI 답변 속까지</p><p class="pe">화면에는 '10월 23일 출고'인데 검색엔진에는 '재고 없음'으로 전달되는 상품 정보, 두 개의 주소로 중복된 상품 페이지, AI가 답변 근거로 인용한 출처처럼 사람이 화면으로는 보기 힘든 문제를 찾았습니다.</p></div>
+    <div class="pillar"><span class="pk">03</span><h3>기계적 정확도</h3><p class="pm">사람의 눈으로 놓치는 불일치까지</p><p class="pe">같은 C6의 보증이 네 곳에서 다르게 표기된 것, 한 페이지 안에서 '5년 보증'과 '1년'이 함께 있는 것, 리테일러의 HDR 등급 오기처럼 채널과 항목을 빠짐없이 대조해야 보이는 오류를 잡아냈습니다.</p><p class="pn">기계가 추출한 결과도 원문과 대조해 확정합니다. 파일럿에서도 자동 요약의 오독 1건을 원문 확인으로 바로잡았습니다.</p></div>
+  </div>
+  <div class="herokey"><span class="step" style="margin:0">UK 파일럿 핵심 결과</span><p>AI는 고객의 질문에 답이 있는 상품 페이지만 추천합니다. UK에서 사업부별 Most Popular 6개 제품과 65" OLED TV를 실제로 확인한 결과입니다.</p></div>
+  <div class="routes">
+    <a class="route" href="#frame/f4"><span class="rk">핵심 결과</span><b>냉장고는 1위 추천, TV·모니터는 미등장</b><span>상품 페이지가 질문에 답하느냐로 갈렸습니다</span></a>
+    <a class="route" href="#frame/f6"><span class="rk">실행 과제</span><b>콘텐츠 과제 8개와 우선순위</b><span>FAQ · PDP · 최신성이 1순위</span></a>
+    <a class="route" href="#bu"><span class="rk">사업부별 진단</span><b>TV · 냉장고 · 모니터 6개 제품</b><span>LG.com · Currys · Amazon UK · ChatGPT</span></a>
+    <a class="route" href="#tv"><span class="rk">TV 심층 사례</span><b>65" OLED C6 전 여정 진단</b><span>홈 → 목록 → 상품 페이지 · 3P 채점 · 원인 30건</span></a>
+  </div>
+  </div></section>`;
+}
+function secF1(){
+  return `<section id="f1"><div class="wrap">
+  <div class="step">P1 · 정의</div>
+  <h2>디지털 미스터리 쇼퍼란?</h2>
+  <p class="lede">AI에 다양한 고객의 특성과 구매 목적을 부여하고, 실제 고객처럼 제품을 탐색하게 하는 진단 방식입니다. 탐색은 두 채널에서 진행합니다.</p>
+  <div class="two" style="margin-bottom:20px">
+    <div class="box"><h3>AI 검색</h3><p style="margin:0">ChatGPT, Google AI Mode, Copilot 등에서 고객이 할 법한 구매 질문을 하고, 답변에서 LG가 어떻게 다뤄지는지 봅니다.</p></div>
+    <div class="box"><h3>마켓플레이스</h3><p style="margin:0">Currys, Amazon 등에서 고객처럼 검색하고 상품 페이지를 비교해, LG가 선택될 만한 정보를 주는지 봅니다.</p></div>
+  </div>
+  <h3>고객 유형 4가지 — 예시는 UK 파일럿에서 실제로 실행한 시나리오입니다</h3>
+  ${T(["고객 유형","AI 검색 시나리오","마켓플레이스 시나리오","주로 보는 지표"],[
+    ["<b>브랜드 미인지</b>","\"100인치 이상 최고의 TV는?\"","Currys에서 '65 inch oled tv' 검색","Discoverability · Visibility"],
+    ["<b>브랜드 비교</b>","\"가장 신뢰할 수 있고 에너지 효율 좋은 아메리칸 냉장고 브랜드는?\"","같은 £1,899의 LG C6와 Samsung S90H 상품 페이지 비교","Recommendation · Citation"],
+    ["<b>구매 고려</b>","\"배관 없이 얼음·물이 나오는 아메리칸 냉장고는?\" / \"OLED 번인은 아직 문제인가?\"","상품 페이지에서 보증·설치·UK 방송 정보 확인","Accuracy · Citation"],
+    ["<b>구매 결정</b>","\"LG OLED TV 최저가와 구매처는?\" "+tag("파일럿 미실행"),"AI 답변이 연결한 링크의 도착 페이지 확인","Conversion Path"]])}
+  </div></section>`;
+}
+function secF2(){
+  const M=[["Discoverability","브랜드를 말하지 않은 검색에서 LG 제품이 발견되는가?","Currys '115 inch tv' 검색 1위는 LG. 반면 'american fridge freezer' 검색 상위 8개에 LG 없음"],
+    ["Visibility","AI 답변에서 LG가 언급되는가?","'100인치 이상 TV', 'Mac용 6K 모니터', '냉장고 신뢰성' 질문에서 LG 미등장"],
+    ["Recommendation","경쟁사 대비 LG 제품이 추천되는가?","TV 구매 질문 10개 중 7개에서 LG 추천. 벽걸이 질문은 Samsung The Frame 1위"],
+    ["Citation","LG.com이 답변의 근거로 인용되는가?","냉장고 질문에서 LG.com 스펙(36 dB, 348 kWh)이 근거로 인용. TV는 What Hi-Fi·RTINGS가 근거"],
+    ["Accuracy","제품 정보와 추천 근거가 정확한가?","2026년 신모델 대신 2025년 모델 추천 / \"LG TV는 Freely에 별도 기기가 필요하다\"는 답변"],
+    ["Conversion Path","추천 이후 LG.com의 올바른 구매 페이지로 연결되는가?","AI가 LG 상품 페이지로 연결한 3건 중 2건은 2025년 모델, 1건은 중복 주소"]];
+  return `<section id="f2"><div class="wrap">
+  <div class="step">P2 · 측정 지표</div>
+  <h2>핵심은 AI가 고객을 얼마나 정확히 재현하느냐가 아니라, LG 제품이 어떻게 발견되고 추천되느냐입니다</h2>
+  <div class="metrics">${M.map((m,i)=>`<div class="metric"><div class="mh"><span class="mn">${i+1}</span><b>${m[0]}</b></div><p class="mq">${m[1]}</p><p class="me"><span>파일럿</span>${m[2]}</p></div>`).join("")}</div>
+  <div class="callout"><b>Visibility와 Citation을 나눠 보는 이유:</b> LG가 추천은 되지만 근거를 리뷰 매체에서 가져오면, LG는 그 답변의 내용을 바꿀 수 없습니다. LG.com이 근거로 인용될 때만 콘텐츠 개선이 AI 답변으로 이어집니다.</div>
+  <div class="caveat"><b>측정 원칙:</b> LLM에 고객 역할을 부여하고 답변만 생성하게 하는 방식은 실제 검색 결과 검증과 다릅니다. 실제 검색 환경에 접속해 결과를 수집하고, 같은 조건에서 반복 측정해야 의미가 있습니다.</div>
+  </div></section>`;
+}
+function secF3(){
+  const lv=v=>v==="높음"?tag(v,"p-ok"):v==="제한적"?tag(v,"p-no"):tag(v,"p-part");
+  return `<section id="f3"><div class="wrap">
+  <div class="step">P3 · 구현 가능 범위</div>
+  <h2>파일럿에서 직접 실행해 보니, 가장 믿을 만한 것은 페이지 콘텐츠 진단이었습니다</h2>
+  <p class="lede">AI 검색 모니터링은 서비스와 접속 환경에 따라 결과가 크게 달랐습니다.</p>
+  ${T(["구분","구현 가능성","설명","파일럿에서 확인한 점"],[
+    ["고객 페르소나 생성",lv("높음"),"연령, 구매 목적, 예산, 선호도를 반영한 가상 고객 생성","구매 미션 6종, 페르소나 3종 설계"],
+    ["구매 탐색 질문 생성",lv("높음"),"페르소나별 검색어와 AI 질문 생성","질문 16개 실행. 실제 수요 기준 확정은 GSC·Ask LG 데이터 필요"],
+    {_cls:"hl",cells:["<b>페이지 콘텐츠 진단</b>",lv("높음"),"LG.com·리테일러 상품 페이지의 정보 구성, FAQ, 구조화 데이터 점검","가장 신뢰도 높은 결과. 실행 과제 대부분이 여기서 나옴"]},
+    ["AI 검색 결과 모니터링",lv("중간~높음"),"실제 검색 환경에서 노출, 언급, 출처 수집","ChatGPT는 실행 가능. Google AI Mode는 보안 확인, Copilot은 사람 확인 단계에서 중단. 접속 위치에 따라 결과가 달라 현지 환경이나 공식 측정 도구 필요"],
+    ["구매 여정 시뮬레이션",lv("중간"),"탐색부터 비교·구매까지 단계별 테스트","Amazon UK는 자동 수집을 차단해 화면 확인으로 대체"],
+    ["실제 고객 행동 예측",lv("제한적"),"AI의 판단이 실제 구매 행동과 일치한다고 보장하기 어려움","3P 결과는 가설로 다루고 Seller Center·GA4로 검증"]])}
+  </div></section>`;
+}
+function secF4(){
+  return `<section id="f4"><div class="wrap">
+  <div class="step">P4 · UK 파일럿 핵심 결과</div>
+  <h2>AI가 LG를 추천하느냐는 상품 페이지가 그 질문의 핵심 기준에 답하느냐로 갈렸습니다</h2>
+  <div class="vs">
+    <div class="side win"><div class="sk">냉장고 · GSXV91MCAE</div>
+      <div class="row"><span>상품 페이지</span><p>이 제품 구매자의 실제 질문 8개로 된 '자주 묻는 질문'과, 배관 여부·소음·연간 전력을 정리한 핵심 스펙 요약</p></div>
+      <div class="row"><span>질문</span><p>"배관 없이 얼음·물이 나오는 아메리칸 냉장고는?"</p></div>
+      <div class="big">1위 추천 <small>· LG.com 스펙을 근거로 인용</small></div></div>
+    <div class="side lose"><div class="sk">TV·모니터 · 115" QNED93 · W6 · 45GX950A · 32U990A</div>
+      <div class="row"><span>상품 페이지</span><p>'자주 묻는 질문'이 구독(렌탈) 서비스 안내이거나 카테고리 일반 질문뿐. 번인 보증, Mac 작업 환경, 초대형 TV 설치, 케이블 없는 벽걸이처럼 고객이 실제로 묻는 내용에 대한 답이 없음</p></div>
+      <div class="row"><span>질문</span><p>"100인치 이상 TV" · "케이블 없는 벽걸이 TV" · "울트라와이드 OLED와 번인" · "MacBook용 6K 모니터"</p></div>
+      <div class="big">4개 제품 모두 미등장</div></div>
+  </div>
+  <p class="lede" style="margin-top:20px">같은 회사의 같은 사이트에서도 상품 페이지가 질문에 답하는지에 따라 결과가 갈렸습니다. 냉장고의 상품 페이지 운영 방식이 사내 모범 사례이고, 이를 TV·모니터로 확산하는 것이 첫 번째 과제입니다 <span class="note">(의견)</span>.</p>
+  <div class="kpis">
+    <div class="kpi"><div class="l">TV 구매 질문 중 LG.com에 답이 있는 질문</div><div class="v">2<small> / 10</small></div><div class="d"><a href="#tv/s1">TV 심층 사례 보기</a></div></div>
+    <div class="kpi"><div class="l">6개 제품 관련 질문 중 해당 제품 미등장</div><div class="v">5<small> / 6</small></div><div class="d"><a href="#bu/b1">사업부별 진단 보기</a></div></div>
+    <div class="kpi"><div class="l">ChatGPT가 LG 추천 시 2025년 모델 1순위</div><div class="v">4<small> / 7</small></div><div class="d">TV 질문 기준</div></div>
+    <div class="kpi"><div class="l">Currys LG PDP 평균 vs 경쟁</div><div class="v">3.4<small> / 3.8</small></div><div class="d">65" OLED, 5점 척도</div></div>
+  </div>
+  </div></section>`;
+}
+function secF5(){
+  return `<section id="f5"><div class="wrap">
+  <div class="step">P5 · 한계와 보완</div>
+  <h2>실무적으로 고려할 한계</h2>
+  ${T(["한계","보완 방법"],[
+    ["① AI 페르소나가 실제 소비자를 대표하지는 않음","GA4, 검색 데이터, 고객 조사로 실제 고객 유형과 질문을 정의"],
+    ["② AI 검색 결과는 같은 질문에도 달라질 수 있음","국가·언어·검색 환경·측정 시점을 고정하고 서로 다른 날짜에 반복 측정"],
+    ["③ AI 추천이 실제 구매 성과를 의미하지는 않음","GA4 유입·전환 데이터와 연계해 성과 검증"],
+    {_cls:"hl",cells:["④ LG가 추천되지 않은 원인이 콘텐츠가 아닐 수 있음","원인을 콘텐츠 / 데이터·Feed / 가격·보증·유통으로 나눠 판정. 예: Currys 115\" 보증 1년(경쟁사 5년), 냉장고 리테일러 미판매는 콘텐츠로 해결할 수 없는 문제"]}])}
+  </div></section>`;
+}
+function secF6(){
+  const P=[
+   [1,"③ FAQ 콘텐츠 확대","제품별 '자주 묻는 질문'을 갖춘 냉장고만 AI가 1위로 추천하고 LG.com을 근거로 인용. TV와 32U990A 상품 페이지의 '자주 묻는 질문'은 구독(렌탈) 서비스 안내뿐이고, 45GX950A는 게이밍 모니터 일반 질문뿐(번인 질문 없음)","실제 고객 질문 기반 제품별 FAQ 기획·제작, 검색엔진·AI가 질문과 답으로 읽을 수 있는 형식(FAQ 구조화 데이터) 적용","단독"],
+   [1,"⑤ PDP 콘텐츠 최적화","45GX950A 번인 보증 미표기, 115\" 배송·설치 안내 없음, TV에 Freely·UK 방송 정보 없음","구매 결정 질문(보증·설치·호환·UK 정보)에 답하는 상세 정보, 핵심 USP·Benefit 카피 개선","단독 (보증 조건은 사업부 확인)"],
+   [1,"⑦ 최신성 관리","라인업 가이드가 2025년 모델 비교. ChatGPT가 LG 추천 7개 질문 중 4개에서 2025년 모델을 1순위로 제시","신모델 출시에 맞춘 가이드·비교표 갱신 주기, 구형 콘텐츠 갱신 또는 정리(Sunset)","단독"],
+   [2,"⑧ 정보 정합성","C6 보증이 네 곳에서 다르게 표기, GSXV91MCAE 상품 페이지가 주소 두 개로 중복, 검색엔진에 전달되는 재고 정보가 '재고 없음'으로 잘못 표시, Currys의 32U990A HDR 등급 오기","제품별 검증된 원본 정보(스펙·보증·모델 코드) 관리, 채널 배포 전 QA","협업 (데이터·법인)"],
+   [2,"⑥ 채널별 콘텐츠 최적화","냉장고는 LG.com 모델(GSXV)과 리테일러 판매 모델(GSXE)이 다름. Amazon UK의 TV는 사운드바 묶음 상품으로만 있고, 브랜드 상세 소개(A+ 콘텐츠)와 리뷰가 없음","채널별 검색 의도·노출 환경에 맞춘 콘텐츠, 모델 코드 대응표","협업 (영업·리테일)"],
+   [2,"① 신규 콘텐츠 발굴","'100인치 이상 TV', 'Mac용 6K 모니터' 질문에서 LG 미등장","고객 검색 의도 기반 구매 가이드·추천형 콘텐츠","단독"],
+   [3,"② 비교 콘텐츠 강화","냉장고 신뢰성·에너지 질문에서 LG 미등장, 벽걸이 질문은 Samsung The Frame 1위","구매 기준 중심 비교(경쟁사 직접 언급은 법무 검토), 차별 근거(10년 컴프레서 보증, Quiet Mark) 제시","단독 (법무 검토)"],
+   [3,"④ 제품 활용 콘텐츠 강화","AI 답변은 텍스트·스펙을 인용했고 이미지·영상 인용은 관찰되지 않음. 마켓플레이스 첫 화면 메시지는 경쟁사가 앞섬","라이프스타일·사용 시나리오 기반 이미지·영상. 마켓플레이스 전환용으로 우선 배치","단독"]];
+  const pc=p=>p===1?"p-no":p===2?"p-part":"p-hyp";
+  return `<section id="f6"><div class="wrap">
+  <div class="step">P6 · 실행 과제</div>
+  <h2>진단 결과를 콘텐츠 제작 과제 8개로 옮겼습니다</h2>
+  <p class="lede">진단 결과는 모두 UK 파일럿에서 확인한 사례입니다. 우선순위는 근거의 강도와 실행 속도를 기준으로 정했습니다 <span class="note">(의견)</span>.</p>
+  <div class="tasks">${P.map(p=>`<div class="tcard"><div class="th">${tag(p[0]+"순위",pc(p[0]))}<h3>${p[1]}</h3><span class="note">${p[4]}</span></div><div class="tb"><div><span class="lab">진단 결과</span><p>${p[2]}</p></div><div><span class="lab">실행 과제</span><p>${p[3]}</p></div></div></div>`).join("")}</div>
+  </div></section>`;
+}
+
+/* ---- 사업부별 진단 ---- */
+const GLOSS=`<details class="gloss"><summary>용어 풀이</summary><dl>
+   <dt>자주 묻는 질문 (FAQ)</dt><dd>LG.com 상품 페이지 하단의 'Frequently asked questions' 영역. 냉장고는 제품 구매 질문으로 채워져 있고, TV와 일부 모니터는 같은 자리에 구독(렌탈) 서비스 안내가 공통으로 들어가 있습니다.</dd>
+   <dt>FAQ 구조화 데이터</dt><dd>페이지 속 질문과 답을 검색엔진·AI가 '질문-답' 쌍으로 읽을 수 있게 표시하는 코드. 화면에는 보이지 않습니다.</dd>
+   <dt>구조화 데이터 (상품 정보)</dt><dd>가격·재고·평점처럼 검색엔진과 AI 쇼핑에 전달되는 페이지 정보. 화면과 다르면 검색 결과에 잘못 표시될 수 있습니다.</dd>
+   <dt>정식 주소 (canonical)</dt><dd>같은 내용의 페이지가 여러 주소로 열릴 때 "이 주소가 원본"이라고 검색엔진에 알려 주는 표시.</dd>
+   <dt>Bullet</dt><dd>리테일러 상품 페이지 첫 화면의 핵심 특징 요약 줄.</dd>
+   <dt>A+ 콘텐츠</dt><dd>Amazon에서 브랜드가 직접 이미지와 설명으로 꾸미는 상세 소개 영역.</dd>
+   <dt>번인</dt><dd>OLED 화면에 같은 이미지를 오래 띄우면 잔상이 남는 현상. OLED TV·모니터 구매자의 대표적인 걱정입니다.</dd>
+  </dl></details>`;
+const BUP=[
+ {bu:"TV",name:"115\" QNED evo Mini LED QNED93",code:"115QNED93B6",url:"https://www.lg.com/uk/tvs-soundbars/qned-evo/115qned93b6/",price:"£9,999.98",rev:"5.0 / 1건",ai:"no",
+  lg:[["ok","제목에 2026 연식 표기, 핵심 특징 3줄 요약, 'Ask LG' AI 상담 버튼(추천 질문 포함)"],["no","상품 페이지의 '자주 묻는 질문'에 제품 질문이 없음. 그 자리에 구독(렌탈) 서비스 안내 3개(사용감·파손 시 비용·구독 기간)만 있어 번인·설치·보증 같은 구매 질문에 답하지 못함"],["no","폭 약 2.5m의 115형 제품인데 배송 방식, 집 안 반입, 벽걸이 설치 안내가 없음"],["no","경쟁사가 내세우는 '눈부심 없음(Glare Free)' 같은 밝은 거실용 메시지가 없고, UK 무료 방송 서비스(Freeview·Freely)와 BBC iPlayer 같은 UK 앱 지원 정보도 없음"],["no","제품 자체의 수상·전문가 평가 근거가 없음 (운영체제 webOS 수상만 표시)"]],
+  cur:"£9,999 · <b>보증 1년</b> · 리뷰 0건 · 이미지 9장. 같은 115형 Samsung QN90F는 £6,999에 보증 5년이고 첫 화면에 'Glare Free'를 표시, TCL C7K 115형도 보증 5년. 다만 '115 inch tv' 검색 1위는 LG",amz:"검색 결과 없음",
+  gpt:"\"100인치 이상 최고 TV\" → <b>LG 미등장</b>. Hisense 100\" 3종, TCL 98\", Sony 115\" 추천"},
+ {bu:"TV",name:"77\" Wallpaper OLED evo W6 True Wireless",code:"OLED77W69LA",url:"https://www.lg.com/uk/tvs-soundbars/oled-evo/oled77w69la/",price:"£3,999.98",rev:"5.0 / 2건",ai:"part",
+  lg:[["ok","CES 2026 Best in Show 등 전문가 수상 다수"],["ok","반사 없는 화면(Reflection Free), 5년 패널 보증, 무료 벽걸이 설치 혜택을 명시"],["ok","TV 본체와 입력 단자 박스(Zero Connect Box)를 무선으로 연결해 벽에 케이블이 보이지 않는 True Wireless 방식을 설명"],["no","상품 페이지의 '자주 묻는 질문'에 제품 질문이 없음. 그 자리에 구독(렌탈) 서비스 안내 3개(사용감·파손 시 비용·구독 기간)만 있어 번인·설치·보증 같은 구매 질문에 답하지 못함"],["no","UK 무료 방송 서비스(Freeview·Freely)와 UK 앱 지원 정보가 없음"]],
+  cur:"£3,999 · 보증 5년 · 리뷰 0건 · 이미지 14장. 같은 77형 Samsung S95H는 £3,699, 첫 화면에 'Glare Free', 리뷰 4건",amz:"W6 판매 페이지 없음 (C6·B6만 사운드바 묶음 상품으로 노출)",
+  gpt:"\"케이블 없이 벽에 평평하게 거는 TV\" → Samsung The Frame 1위. LG는 <b>2025년 G5만</b> 추천, W6 미등장"},
+ {bu:"냉장고",name:"635L InstaView 아메리칸 냉장고, Black",code:"GSXV91MCAE",url:"https://www.lg.com/uk/fridge-freezers/american-style-fridge-freezers/gsxv91mcae1/",price:"£1,378.98",rev:"4.5 / 206건",ai:"ok",
+  lg:[["ok","'자주 묻는 질문' 8개가 이 제품 구매자의 실제 질문(배관 없이 얼음 디스펜서가 어떻게 작동하나, 어떤 크기가 필요한가 등)으로 구성. 검색엔진·AI가 질문과 답으로 읽을 수 있는 형식(FAQ 구조화 데이터)으로도 표시"],["ok","핵심 스펙 요약: 635L · 913×1790×735mm · 연간 348 kWh · 에너지 E등급 · 배관 불필요"],["ok","핵심 부품(컴프레서) 10년 보증, 집 안 배치를 미리 보는 AR 보기"],["no","화면에는 '10월 23일 출고'인데 검색엔진·AI에 전달되는 페이지 정보에는 '재고 없음'으로 표시 — 구글 쇼핑 등에서 품절로 보일 수 있음"],["no","같은 제품 페이지가 주소 두 개(…/gsxv91mcae/, …/gsxv91mcae1/)로 열리고 둘 다 자신이 정식 주소라고 표시 — 검색 평가가 나뉠 수 있고, ChatGPT도 다른 쪽 주소로 연결"]],
+  cur:"<b>이 모델은 팔지 않음</b> — 비슷한 사양의 리테일러 전용 모델(GSXE 계열, 예: GSXE80PYBE £1,599·리뷰 0건)만 판매해 고객과 AI가 같은 제품으로 연결하기 어려움. 'american fridge freezer' 검색 상위 8개에 LG 없음",amz:"검색 결과 없음",
+  gpt:"\"배관 없이 얼음·물 나오는 냉장고\" → <b>1위 추천, LG.com 스펙 인용</b> ✓ · \"가장 신뢰할 수 있는 브랜드\" → LG 미등장 (비교 전력 225~287 kWh vs LG 348)"},
+ {bu:"냉장고",name:"635L InstaView 아메리칸 냉장고, Silver",code:"GSXV80PZLE",url:"https://www.lg.com/uk/fridge-freezers/american-style-fridge-freezers/gsxv80pzle1/",price:"£1,278.98",rev:"4.7 / 107건",ai:"no",
+  lg:[["ok","'자주 묻는 질문' 7개가 제품 구매 질문으로 구성되고 AI가 읽기 쉬운 형식으로도 표시"],["ok","핵심 스펙 요약(배관 필요 모델), 저소음 인증(Quiet Mark)"],["no","배관이 필요한 모델인데 \"배관하려면 무엇이 필요한가\" 질문의 답이 유튜브 링크 한 줄뿐 — AI가 인용할 수 있는 글로 된 답이 없음"]],
+  cur:"<b>이 모델은 팔지 않음</b> (리테일러 전용 GSXE 계열만 판매)",amz:"검색 결과 없음",gpt:"신뢰성·에너지 질문에서 LG 미등장"},
+ {bu:"모니터",name:"45\" UltraGear OLED 5K2K",code:"45GX950A-B",url:"https://www.lg.com/uk/monitors/gaming/45gx950a-b/",price:"£1,479",rev:"4.8 / 400건",ai:"part",
+  lg:[["ok","핵심 스펙 요약, 번인(화면 잔상)을 줄이는 화면 보호 설정 기능 설명"],["no","<b>번인이 생겼을 때 보증되는지, 몇 년인지 페이지에 없음</b> (보증 안내 페이지 링크만 있음)"],["no","'자주 묻는 질문' 9개가 '게이밍 모니터 고르는 법', '몇 Hz가 좋은가' 같은 일반 질문. OLED 모니터 구매자가 가장 걱정하는 번인 질문은 없음"],["no","제품 수상·전문가 평가 근거 없음"]],
+  cur:"<b>이 모델은 팔지 않음</b> (같은 45형의 다른 모델 45GX900A만 판매, 보증 2년)",amz:"✓ 단독 상품 페이지가 있고, 브랜드가 꾸미는 상세 소개 영역(A+ 콘텐츠)에 이미지 13장. 평점 4.6 / 리뷰 28건",
+  gpt:"\"울트라와이드 OLED 게이밍 모니터, 번인 걱정?\" → <b>45GX950A 미등장</b>, LG는 구형 34GS95QE 4위. 경쟁사의 '3년 번인 보증' 강조, LG는 \"2년, UK 조건 확인 필요\""},
+ {bu:"모니터",name:"32\" UltraFine evo 6K Thunderbolt 5",code:"32U990A-S",url:"https://www.lg.com/uk/monitors/uhd-4k-5k/32u990a-s/",price:"£1,399.98",rev:"4.4 / 75건",ai:"no",
+  lg:[["ok","'세계 최초 6K Thunderbolt 5 모니터' 메시지, Mac 사용자용 기능 설명, 노트북 96W 충전"],["ok","전문가 수상(AVForums Recommended, CES 2025, iF 디자인상)"],["no","상품 페이지의 '자주 묻는 질문'에 제품 질문이 없음. 그 자리에 구독(렌탈) 서비스 안내 3개(사용감·파손 시 비용·구독 기간)만 있어 번인·설치·보증 같은 구매 질문에 답하지 못함"],["part","리뷰는 75건으로 표시되지만 '추천 의견'은 2명 중 2명뿐 — 다른 모델의 리뷰가 합쳐져 표시되는 것으로 보임"],["part","같은 페이지 안에서 패널 이름이 다름 — 제목은 'Nano IPS Black', 핵심 스펙은 'IPS Black'"]],
+  cur:"£1,399 · 리뷰 0건. 상품 첫 화면 요약에 HDR 등급을 <b>'True Black 600'으로 잘못 표기</b>(LG.com 기준 'DisplayHDR 600', True Black은 OLED용 등급). Thunderbolt 5·Mac 호환·96W 충전 같은 핵심 강점은 빠짐. 경쟁 6K 모니터 ASUS PA32QCV는 £1,299",amz:"✓ 단독 상품 페이지와 브랜드 상세 소개(A+ 콘텐츠) 있음. 평점 3.7 / 리뷰 10건. 제목에 'MAC compatitble' 오타",
+  gpt:"\"MacBook Pro용 5K·6K 모니터\" → <b>LG 미등장</b>. BenQ·Apple·ASUS(6K)·Dell 추천"}];
+function secBU(){
+  const aiTag={ok:tag("AI 1위 추천","p-ok"),part:tag("AI: 다른 LG 모델만","p-part"),no:tag("AI 미등장","p-no")};
+  const cell=(t,c)=>`<td class="${c||""}">${t}</td>`;
+  return `<section id="b1"><div class="wrap">
+  <div class="step">사업부별 진단 · ${BU_DATE}</div>
+  <h1>냉장고는 상품 페이지가 질문에 답해서 추천받고, TV·모니터 1위 제품은 답하지 않아서 빠집니다</h1>
+  <p class="lede">LG.com UK 사업부별 Most Popular 1·2위 6개 제품을 LG.com, Currys, Amazon UK, ChatGPT에서 확인했습니다.</p>
+  ${GLOSS}
+  <div class="tw"><table class="bu"><thead><tr><th></th><th>TV</th><th>냉장고</th><th>모니터</th></tr></thead><tbody>
+   <tr><th scope="row">LG.com 상품 페이지</th>${cell("기능·수상 설명은 풍부. '자주 묻는 질문'이 구독(렌탈) 서비스 안내로 채워져 구매 질문에 답하지 않음. 리뷰 1~2건. 115\"에 배송·설치 안내 없음")}${cell("<b>'자주 묻는 질문'이 제품 구매 질문 7~8개로 구성</b>되고 AI가 읽기 쉬운 형식으로도 표시. 용량·치수·연간 전력·배관 여부 요약. 리뷰 107~206건","good")}${cell("45GX950A의 '자주 묻는 질문'은 게이밍 모니터 일반 질문뿐(번인 질문 없음), 32U990A는 구독(렌탈) 서비스 안내. 번인 보증 기간 미표기")}</tr>
+   <tr><th scope="row">Currys</th>${cell("둘 다 판매. 115\" 보증 <b>1년</b> (Samsung·TCL 5년). 리뷰 0건","bad")}${cell("<b>LG.com 모델은 팔지 않음</b> — 리테일러 전용 모델(GSXE 계열)만 판매. '아메리칸 냉장고' 검색 상위 8개에 LG 없음","bad")}${cell("32U990A의 HDR 등급을 잘못 표기하고 Thunderbolt 5·Mac 호환 같은 핵심 강점 누락. 45GX950A는 판매하지 않음")}</tr>
+   <tr><th scope="row">Amazon UK</th>${cell("115\" 없음. W6 없음 (C6·B6만 사운드바 묶음 상품으로 판매)")}${cell("두 모델 모두 검색 결과 없음","bad")}${cell("<b>둘 다 단독 상품 페이지 + 브랜드 상세 소개(A+ 콘텐츠)</b>. 사업부 중 가장 양호","good")}</tr>
+   <tr><th scope="row">ChatGPT</th>${cell("'100인치 이상' LG 미등장. 벽걸이 질문에 W6 대신 2025 G5","bad")}${cell("<b>비배관 질문 1위 + LG.com 인용</b>. 신뢰성 질문 LG 미등장","good")}${cell("45GX950A·32U990A 모두 미등장. 번인 보증 비교 불리","bad")}</tr>
+  </tbody></table></div>
+  </div></section>
+  <section id="b2"><div class="wrap">
+  <div class="step">공통 패턴</div>
+  <h2>사업부를 가로지르는 다섯 가지 패턴</h2>
+  <ol class="pat">
+   <li><b>AI 노출은 상품 페이지가 그 질문의 핵심 기준에 답하느냐로 갈립니다.</b> 비배관 냉장고 질문에서 ChatGPT는 LG.com의 소음·전력·비배관 정보를 근거로 GSXV91MCAE를 1위로 꼽았습니다. 번인 보증, Mac 작업 환경, 초대형 설치, 케이블 없는 벽걸이는 상품 페이지가 질문의 언어로 답하지 않았고, 해당 제품은 답변에 나오지 않았습니다.</li>
+   <li><b>상품 페이지의 '자주 묻는 질문' 운영이 사업부마다 다릅니다.</b> 냉장고는 '배관 없이 얼음 디스펜서가 어떻게 작동하나', '어떤 크기가 필요한가' 같은 이 제품 구매자의 질문으로 채웠습니다. 모니터 45GX950A는 '게이밍 모니터 고르는 법' 같은 일반 질문뿐이고, TV 2종과 32U990A는 같은 자리에 구독(렌탈) 서비스 안내(사용감·파손 비용·구독 기간)만 들어가 있습니다.</li>
+   <li><b>LG.com 1위 제품과 리테일러 판매 제품이 다릅니다.</b> 냉장고는 GSXV(LG.com)와 GSXE(리테일러), 45" 모니터는 45GX950A(LG.com)와 45GX900A(Currys)로 나뉩니다. 115" TV와 냉장고 2종은 Amazon UK에 없습니다.</li>
+   <li><b>신모델의 신뢰 신호가 비어 있습니다.</b> LG.com에서 W6 리뷰 2건, 115" 1건이고, Currys의 관련 LG 페이지는 모두 리뷰 0건입니다.</li>
+   <li><b>보증이 경쟁 조건에서 밀리거나 보이지 않습니다.</b> Currys 115"는 LG 1년 대 Samsung·TCL 5년이고, LG.com 45GX950A 페이지에는 번인 보증 기간이 없습니다.</li>
+  </ol>
+  </div></section>
+  <section id="b3"><div class="wrap">
+  <div class="step">제품별 상세</div>
+  <h2>6개 제품 진단 카드</h2>
+  <div class="pcards">${BUP.map(p=>{const c={ok:0,part:0,no:0};p.lg.forEach(x=>c[x[0]]++);return `<article class="pcard"><header><span class="bu-tag">${p.bu}</span>${aiTag[p.ai]}</header><h3><a href="${p.url}" target="_blank" rel="noopener">${p.name}</a></h3><div class="note">${p.code} · ${p.price} · 리뷰 ${p.rev}</div>
+   <div class="pc-sec"><span class="lab">LG.com</span><ul class="chk">${p.lg.slice().sort((a,b)=>({no:0,part:1,ok:2}[a[0]]-{no:0,part:1,ok:2}[b[0]])).map(x=>`<li>${mark[x[0]]}<span>${x[1]}</span></li>`).join("")}</ul></div>
+   <div class="pc-sec"><span class="lab">Currys</span><p>${p.cur}</p></div>
+   <div class="pc-sec"><span class="lab">Amazon UK</span><p>${p.amz}</p></div>
+   <div class="pc-sec ai"><span class="lab">ChatGPT</span><p>${p.gpt}</p></div></article>`}).join("")}</div>
+  </div></section>
+  <section id="b4"><div class="wrap">
+  <div class="step">사업부별 우선 과제 <span class="note">(의견)</span></div>
+  <h2>냉장고의 FAQ 운영 방식을 TV·모니터로 확산하는 것이 가장 효과가 큰 과제입니다</h2>
+  ${T(["사업부","즉시","4주","8주"],[
+   ["<b>TV</b>","Currys 115\" 보증 1년 조건 확인·정정","115\" 상품 페이지에 배송·반입·설치 안내와 보증 명시 / W6를 '케이블 없는 벽걸이' 질문의 답으로 정리","TV 상품 페이지 FAQ를 냉장고 방식으로 교체"],
+   ["<b>냉장고</b>","GSXV91MCAE 중복 주소 통합, 재고 구조화 데이터 수정","LG.com 모델(GSXV)과 리테일러 모델(GSXE) 대응표, 리테일러 노출 점검","신뢰성·에너지 근거 콘텐츠(10년 컴프레서 보증, Quiet Mark), 배관 FAQ 답변 텍스트화"],
+   ["<b>모니터</b>","Currys 32U990A 'True Black' 오기 정정 요청","45GX950A 번인 보증 명시 + FAQ에 번인 질문 / 32U990A Mac 워크플로 FAQ, 리테일러 Bullet에 Thunderbolt 5·96W·Mac 반영","리뷰 통합 정책 확인('추천 2/2')"]])}
+  <div class="caveat">${BU_DATE}에 한국에서 접속해 확인했습니다. 사업부별 ChatGPT 관찰은 질문당 1회입니다. Most Popular 제품은 요청받은 6개를 그대로 사용했습니다.</div>
+  </div></section>`;
+}
+
+/* ===================== render ===================== */
+function render(){
+  const keep={};document.querySelectorAll("#s7 [id]").forEach(el=>{if("value" in el&&el.tagName!=="BUTTON")keep[el.id]=el.value});
+  const st={g:($("#g_status")||{}).textContent,j:($("#j_status")||{}).textContent};
+  const openC=[...document.querySelectorAll("details.cause")].map(d=>d.open);
+  const html={frame:()=>secFrameHero()+secF1()+secF2()+secF3()+secF4()+secF5()+secF6(),bu:()=>secBU(),tv:()=>secConclusion()+secReady()+secAI()+secPDP()+secCauses()+secPriority()+secNext()}[VIEW];
+  $("#app").innerHTML=html();
+  nav();
+  if(openC.length)document.querySelectorAll("details.cause").forEach((d,i)=>d.open=openC[i]);
+  Object.entries(keep).forEach(([id,v])=>{const el=document.getElementById(id);if(el&&v!=="")el.value=v});
+  if(st.g&&$("#g_status"))$("#g_status").textContent=st.g;if(st.j&&$("#j_status"))$("#j_status").textContent=st.j;
+  wire();
+}
+function wire(){
+  if(!$("#m_p"))return;
+  const upd=()=>{$("#m_text").textContent=MISSIONS[$("#m_p").value].replace("{R}",$("#m_r").value)};upd();
+  $("#m_p").onchange=upd;$("#m_r").onchange=upd;
+  $("#m_copy").onclick=async()=>{try{await navigator.clipboard.writeText($("#m_text").textContent);$("#m_copy").textContent="복사됨"}catch(e){const r=document.createRange();r.selectNodeContents($("#m_text"));getSelection().removeAllRanges();getSelection().addRange(r)}};
+  const today=new Date().toISOString().slice(0,10);
+  const gf=$("#geoForm");
+  if(gf){if(!$("#g_date").value)$("#g_date").value=today;
+    $("#g_copy").onclick=async()=>{const q=QS.find(x=>x.id===$("#g_q").value);try{await navigator.clipboard.writeText(q.q);$("#g_status").textContent="질문을 복사했습니다"}catch(e){$("#g_status").textContent=q.q}};
+    gf.onsubmit=async e=>{e.preventDefault();const b=$("#g_save");b.disabled=true;$("#g_status").textContent="저장 중…";
+      const d={q:$("#g_q").value,ai:$("#g_ai").value,run:+$("#g_run").value,date:$("#g_date").value,state:$("#g_state").value,cite:$("#g_cite").value,obs:$("#g_obs").value,env:$("#g_env").value.trim(),comp:$("#g_comp").value.trim(),note:$("#g_note").value.trim(),savedAt:new Date().toISOString()};
+      try{await DB.collection("geo_obs").doc(`${d.q}_${d.ai}_${d.run}`).set(d);$("#g_status").textContent=`${d.q} · ${d.run}회차를 저장했습니다`;$("#g_comp").value="";$("#g_note").value=""}
+      catch(err){$("#g_status").textContent=err&&err.code==="invalid_argument"?"저장 권한이 없습니다":"저장하지 못했습니다. 잠시 후 다시 시도하세요"}
+      b.disabled=false}}
+  const jf=$("#jForm");
+  if(jf){if(!$("#j_date").value)$("#j_date").value=today;
+    jf.onsubmit=async e=>{e.preventDefault();const b=$("#j_save");b.disabled=true;$("#j_status").textContent="저장 중…";
+      const d={p:$("#m_p").value,r:$("#m_r").value,run:+$("#j_run").value,date:$("#j_date").value,rank:$("#j_rank").value?+$("#j_rank").value:null,stage:$("#j_stage").value,win:$("#j_win").value.trim(),why:$("#j_why").value.trim(),savedAt:new Date().toISOString()};
+      try{await DB.collection("journeys").doc(`${d.p}_${d.r.replace(/\s/g,"")}_${d.run}`).set(d);$("#j_status").textContent="저장했습니다"}
+      catch(err){$("#j_status").textContent=err&&err.code==="invalid_argument"?"저장 권한이 없습니다":"저장하지 못했습니다"}
+      b.disabled=false}}
+}
+function nav(){
+  $("#tabs").innerHTML=Object.entries(VIEWS).map(([k,v])=>`<a href="#${k}" data-v="${k}" class="${k===VIEW?"on":""}"${k===VIEW?' aria-current="page"':""}>${v.label}</a>`).join("");
+  $("#toc").innerHTML=VIEWS[VIEW].secs.length>1?VIEWS[VIEW].secs.map(([id,l])=>`<a href="#${VIEW}/${id}" data-s="${id}">${l}</a>`).join(""):"";
+}
+function route(){
+  let h="";try{h=decodeURIComponent(location.hash.slice(1))}catch(e){}
+  let [v,sid]=h.split("/");
+  const legacy=Object.entries(VIEWS).find(([k,x])=>x.secs.some(s=>s[0]===v));
+  if(legacy){sid=v;v=legacy[0]}
+  if(!VIEWS[v])v="frame";
+  const changed=v!==VIEW;VIEW=v;
+  if(changed||!$("#app").innerHTML)render();else nav();
+  observe();
+  const el=sid&&document.getElementById(sid);
+  if(el){el.scrollIntoView()}else if(changed){window.scrollTo(0,0)}
+}
+document.addEventListener("click",e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const h=a.getAttribute("href");if(h.length<2)return;e.preventDefault();try{history.replaceState(null,"",h)}catch(err){};route()});
+window.addEventListener("hashchange",route);
+render();
+const io=("IntersectionObserver" in window)?new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll("#toc a").forEach(a=>a.classList.toggle("on",a.dataset.s===e.target.id))}})},{rootMargin:"-40% 0px -55% 0px"}):null;
+function observe(){if(io){io.disconnect();document.querySelectorAll("section").forEach(s=>io.observe(s))}}
+route();
+
+</script>
+
+</body>
+</html>
