@@ -376,7 +376,7 @@ const isKR=o=>/^KR/.test(o.env||"");
 const allF=CAUSES.flatMap(c=>c.f.map(f=>({...f,c})));
 
 const VIEWS={
- frame:{label:"제안 프레임",secs:[["f0","개요"],["f1","P1 정의"],["f2","P2 지표"],["f3","P3 구현 범위"],["f4","P4 핵심 결과"],["f5","P5 한계"],["f6","P6 실행 과제"]]},
+ frame:{label:"제안 프레임",secs:[["f0","개요"],["f1","P1 정의"],["f2","P2 지표"],["f3","P3 구현 범위"],["f4","P4 핵심 결과"],["f4b","P4 AI 기준선"],["f5","P5 한계"],["f6","P6 실행 과제"]]},
  bu:{label:"사업부별 진단",secs:[["b1","한눈에 보기"],["b2","공통 패턴"],["b3","제품별 상세"],["b4","우선 과제"]]},
  tv:{label:"TV 심층 사례",secs:[["s0","결론"],["s1","근거 ① LG.com"],["s2","근거 ② AI 답변"],["s3","근거 ③ 3P PDP"],["s4","원인"],["s5","우선 과제"],["s6","다음 단계"]]}};
 let VIEW="frame";
@@ -686,7 +686,7 @@ function secF3(){
     ["고객 페르소나 생성",lv("높음"),"연령, 구매 목적, 예산, 선호도를 반영한 가상 고객 생성","구매 미션 6종, 페르소나 3종 설계"],
     ["구매 탐색 질문 생성",lv("높음"),"페르소나별 검색어와 AI 질문 생성","질문 16개 실행. 실제 수요 기준 확정은 GSC·Ask LG 데이터 필요"],
     {_cls:"hl",cells:["<b>페이지 콘텐츠 진단</b>",lv("높음"),"LG.com·리테일러 상품 페이지의 정보 구성, FAQ, 구조화 데이터 점검","가장 신뢰도 높은 결과. 실행 과제 대부분이 여기서 나옴"]},
-    ["AI 검색 결과 모니터링",lv("중간~높음"),"실제 검색 환경에서 노출, 언급, 출처 수집","ChatGPT는 실행 가능. Google AI Mode는 보안 확인, Copilot은 사람 확인 단계에서 중단. 접속 위치에 따라 결과가 달라 현지 환경이나 공식 측정 도구 필요"],
+    ["AI 검색 결과 모니터링",lv("중간~높음"),"실제 검색 환경에서 노출, 언급, 출처 수집","직접 실행은 ChatGPT만 가능(Google AI Mode는 보안 확인, Copilot은 사람 확인 단계에서 중단). 상용 도구(ZipTie)로 3개 엔진 측정에 성공했으나 체험판은 미국 위치만 지원"],
     ["구매 여정 시뮬레이션",lv("중간"),"탐색부터 비교·구매까지 단계별 테스트","Amazon UK는 자동 수집을 차단해 화면 확인으로 대체"],
     ["실제 고객 행동 예측",lv("제한적"),"AI의 판단이 실제 구매 행동과 일치한다고 보장하기 어려움","3P 결과는 가설로 다루고 Seller Center·GA4로 검증"]])}
   </div></section>`;
@@ -714,13 +714,72 @@ function secF4(){
   </div>
   </div></section>`;
 }
+/* ---- 상용 도구 기준선 (ZipTie, 2026-10-19) ---- */
+const ZT_DATE="2026-10-19";
+const ZT_ENG=[["Microsoft Copilot",58,91,"22건 (실패 3건 제외)"],["Google AI Overviews",57,86,"21건"],["ChatGPT",49,60,"25건"]];
+/* [질문, 사업부, LG 이름 포함, 점수, 파일럿 연결 메모] */
+const ZT_Q=[
+ ["LG W6 vs Samsung The Frame","TV",1,83,""],
+ ["OLED vs QNED vs Mini LED","TV",0,72,"LG.com 비교 글이 Google 1위"],
+ ["best OLED TV for UK homes in 2026","TV",0,67,""],
+ ["best TV for PS5 and Xbox gaming","TV",0,67,"파일럿: LG.com 답 있음"],
+ ["best alternative to Samsung S95H for a premium OLED TV","TV",0,67,""],
+ ["LG C6 vs Samsung S90H","TV",1,56,""],
+ ["alternatives to Hisense 100 inch Mini LED TVs","TV",0,56,""],
+ ["is OLED burn-in still a problem in 2026","TV",0,39,"파일럿: UK 번인 페이지 없음"],
+ ["which TV has the lowest running cost in the UK","TV",0,33,"파일럿: 에너지 정보 없음"],
+ ["best smart TV for Freely and UK apps","TV",0,33,"파일럿: Freely 정보 없음"],
+ ["alternatives to TCL 98 inch Mini LED TVs","TV",0,33,""],
+ ["best TV to hang on the wall like a picture","TV",0,25,"파일럿: W6 미등장, The Frame 1위"],
+ ["best 100 inch TV in the UK","TV",0,17,"파일럿: 115\" QNED93 미등장"],
+ ["best TV for a bright living room","TV",0,0,"파일럿: Samsung QN90F 1위, LG.com 결론 엇갈림"],
+ ["best American fridge freezer UK 2026","냉장고",0,67,""],
+ ["American fridge freezer no plumbing required","냉장고",0,67,"파일럿: GSXV91 1위"],
+ ["LG fridge freezer with non-plumbed ice and water dispenser","냉장고",1,61,""],
+ ["quietest American fridge freezer with low energy use","냉장고",0,50,"파일럿: LG.com 스펙 인용"],
+ ["most reliable fridge freezer brand UK","냉장고",0,0,"파일럿: LG 미등장"],
+ ["LG 45GX950A vs Alienware AW3426DW","모니터",1,67,""],
+ ["LG 32U990A vs Apple Studio Display","모니터",1,67,""],
+ ["best OLED gaming monitor 2026","모니터",0,39,""],
+ ["best 6K monitor for MacBook","모니터",0,25,"파일럿: 32U990A 미등장"],
+ ["best ultrawide monitor for gaming and work","모니터",0,0,"파일럿: 45GX950A 미등장"]];
+const ZT_SRC=[["youtube.com",9.2],["amazon.com",8.9],["rtings.com",7.5],["bestbuy.com",7.1],["lg.com",5.3,1],["bhphotovideo.com",2.9],["which.co.uk",1.8],["samsung.com",1.4]];
+function secF4b(){
+  const avg=a=>Math.round(a.reduce((s,q)=>s+q[3],0)/a.length);
+  const br=ZT_Q.filter(q=>q[2]), gen=ZT_Q.filter(q=>!q[2]&&!/^alternative|^best alternative/.test(q[0]));
+  const zero=ZT_Q.filter(q=>q[3]===0).length;
+  const bu=["TV","냉장고","모니터"].map(b=>[b,avg(ZT_Q.filter(q=>q[1]===b))]);
+  const bar=(v,max,c)=>`<div style="display:flex;align-items:center;gap:8px"><div style="flex:1;min-width:60px;height:8px;background:var(--soft);border-radius:4px;overflow:hidden"><div style="width:${v/max*100}%;height:100%;background:${c}"></div></div><span class="num" style="width:34px;text-align:right;font-weight:600">${v}</span></div>`;
+  const col=v=>v>=60?"var(--good)":v>=35?"var(--warn)":"var(--crit)";
+  const rows=[...ZT_Q].sort((a,b)=>b[3]-a[3]).map(q=>[`${esc(q[0])}${q[2]?" "+tag("LG 이름 포함"):""}`,q[1],bar(q[3],100,col(q[3])),q[4]?`<span class="note">${q[4]}</span>`:""]);
+  return `<section id="f4b"><div class="wrap">
+  <div class="step">P4 · AI 검색 기준선 (상용 도구 측정)</div>
+  <h2>상용 도구로 AI 엔진 3곳을 측정해도 같은 결론입니다. LG는 이름이 나오면 강하고, 고객이 브랜드를 정하기 전 질문에서는 약합니다</h2>
+  <p class="lede">파일럿에서 막혔던 Google과 Copilot까지 포함해, 상용 GEO 모니터링 도구(ZipTie)로 구매 질문 25개를 ChatGPT, Google AI Overviews, Microsoft Copilot에 물었습니다. ${ZT_DATE}에 엔진별로 한 번 측정한 <b>기준선</b>이며, 콘텐츠 개선 후 같은 질문으로 다시 측정해 변화를 봅니다.</p>
+  <div class="kpis">
+    <div class="kpi"><div class="l">브랜드명 없는 구매 질문 평균 점수</div><div class="v">${avg(gen)}<small> / 100</small></div><div class="d">LG 이름이 들어간 질문은 ${avg(br)}점</div></div>
+    <div class="kpi"><div class="l">AI 답변에 LG가 언급된 비율</div><div class="v">79<small>%</small></div><div class="d">그러나 LG.com 인용은 15%</div></div>
+    <div class="kpi"><div class="l">AI가 인용한 출처 중 lg.com 비중</div><div class="v">5.3<small>%</small></div><div class="d">5위. YouTube·Amazon·RTINGS·Best Buy 다음</div></div>
+    <div class="kpi"><div class="l">LG 점수 0점인 질문</div><div class="v">${zero}<small> / 25</small></div><div class="d">밝은 거실 TV · 냉장고 신뢰성 · 울트라와이드</div></div>
+  </div>
+  <div class="two" style="margin-bottom:20px">
+    <div class="box"><h3>엔진별 결과</h3>${T(["엔진","AI 성공 점수","LG 언급률","측정 수"],ZT_ENG.map(e=>[e[0],`<span class="num">${e[1]}</span>`,`<span class="num">${e[2]}%</span>`,e[3]]))}<p class="note" style="margin:8px 0 0">ChatGPT가 가장 약합니다. 파일럿에서 ChatGPT로 본 결과가 가장 보수적인 쪽이었다는 뜻입니다.</p></div>
+    <div class="box"><h3>AI가 인용한 출처 상위</h3>${ZT_SRC.map(s=>`<div style="display:grid;grid-template-columns:130px 1fr;gap:8px;align-items:center;margin-bottom:4px"><span style="${s[2]?"font-weight:700;color:var(--accent)":""}">${s[0]}</span>${bar(s[1],10,s[2]?"var(--accent)":"var(--muted)")}</div>`).join("")}<p class="note" style="margin:8px 0 0">단위: 전체 인용 중 비중(%). samsung.com(1.4%)은 lg.com보다 낮습니다. 경쟁사가 이기는 근거는 경쟁사 자사몰보다 리뷰 매체·리테일러에서 나옵니다.</p></div>
+  </div>
+  <h3>질문별 LG 점수와 파일럿 결과</h3>
+  <p class="note" style="margin-top:0">점수는 ZipTie가 엔진별 LG 언급·추천 여부 등을 종합한 0~100점입니다. 사업부 평균: ${bu.map(b=>`${b[0]} ${b[1]}점`).join(" · ")}</p>
+  ${T(["질문","사업부","LG 점수","파일럿과의 연결"],rows)}
+  <div class="callout"><b>파일럿과 같은 방향:</b> 파일럿에서 LG.com에 답할 재료가 없던 질문(번인, 에너지 비용, Freely)은 33~39점에 머물렀고, LG가 등장하지 않았던 질문(100인치 TV, 그림 같은 벽걸이 TV, Mac용 6K 모니터, 냉장고 신뢰성, 울트라와이드)은 0~25점이었습니다. 반대로 LG.com 비교 글이 Google 1위인 'OLED vs QNED vs Mini LED'는 72점입니다. 검색에서 이미 순위가 높은 LG.com 페이지가 AI 답변으로도 이어집니다.</div>
+  <div class="caveat"><b>측정 조건:</b> 체험판은 접속 위치가 미국만 지원되어, 영국 쇼핑 질문을 미국 위치에서 측정했습니다. 그래서 인용 출처에 미국 리테일러(Amazon.com, Best Buy 등)가 많고 Currys 같은 영국 리테일러는 적습니다. 점수는 방향을 보는 근거로 쓰고, 개선 전후 비교는 같은 조건으로 측정합니다. 하루 1회 측정이며 Copilot은 3개 질문에서 측정에 실패했습니다.</div>
+  </div></section>`;
+}
 function secF5(){
   return `<section id="f5"><div class="wrap">
   <div class="step">P5 · 한계와 보완</div>
   <h2>실무적으로 고려할 한계</h2>
   ${T(["한계","보완 방법"],[
     ["① AI 페르소나가 실제 소비자를 대표하지는 않음","GA4, 검색 데이터, 고객 조사로 실제 고객 유형과 질문을 정의"],
-    ["② AI 검색 결과는 같은 질문에도 달라질 수 있음","국가·언어·검색 환경·측정 시점을 고정하고 서로 다른 날짜에 반복 측정"],
+    ["② AI 검색 결과는 같은 질문에도 달라질 수 있음","국가·언어·검색 환경·측정 시점을 고정하고 서로 다른 날짜에 반복 측정. 상용 도구 체험판은 미국 위치만 지원되므로, 영국 위치 측정은 유료 플랜 또는 UK 현지 반복 측정으로 보완"],
     ["③ AI 추천이 실제 구매 성과를 의미하지는 않음","GA4 유입·전환 데이터와 연계해 성과 검증"],
     {_cls:"hl",cells:["④ LG가 추천되지 않은 원인이 콘텐츠가 아닐 수 있음","원인을 콘텐츠 / 데이터·Feed / 가격·보증·유통으로 나눠 판정. 예: Currys 115\" 보증 1년(경쟁사 5년), 냉장고 리테일러 미판매는 콘텐츠로 해결할 수 없는 문제"]}])}
   </div></section>`;
@@ -829,7 +888,7 @@ function render(){
   const keep={};document.querySelectorAll("#s7 [id]").forEach(el=>{if("value" in el&&el.tagName!=="BUTTON")keep[el.id]=el.value});
   const st={g:($("#g_status")||{}).textContent,j:($("#j_status")||{}).textContent};
   const openC=[...document.querySelectorAll("details.cause")].map(d=>d.open);
-  const html={frame:()=>secFrameHero()+secF1()+secF2()+secF3()+secF4()+secF5()+secF6(),bu:()=>secBU(),tv:()=>secConclusion()+secReady()+secAI()+secPDP()+secCauses()+secPriority()+secNext()}[VIEW];
+  const html={frame:()=>secFrameHero()+secF1()+secF2()+secF3()+secF4()+secF4b()+secF5()+secF6(),bu:()=>secBU(),tv:()=>secConclusion()+secReady()+secAI()+secPDP()+secCauses()+secPriority()+secNext()}[VIEW];
   $("#app").innerHTML=html();
   nav();
   if(openC.length)document.querySelectorAll("details.cause").forEach((d,i)=>d.open=openC[i]);
